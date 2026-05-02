@@ -1,2 +1,66 @@
-# free60-store
-A native Xbox 360 program to download games directly onto the console. No PC required.
+# Free60 Store
+
+Not affiliated with the [free60 project](https://free60.org)
+
+## What is it?
+
+The free60 store is a piece of homebrew for the Xbox 360 that allows games to be directly downloaded onto the Xbox 360.
+
+## Requirements
+
+* A JTAG/RGH hard modded console OR a console running BadUpdate/ABadAvatar
+* The Xbox 360 must be connected to the internet
+
+## **Not** Required
+
+* Stealth Server
+* Xbox Live
+* Local web server
+
+## How to use
+
+1. Download free60-store.zip from the releases
+2. Transfer it to your console
+3. Launch it using your favourite file manager or dashboard
+4. Search for your favourite game
+5. Navigate the menu with ⬆️ and ⬇️
+6. Select a game by pressing A
+7. Select a version of the game
+8. Press A to begin the download
+
+Currently, this program supports downloading directly from Vimms Lair. While the download speeds can be slow, it contains a variety of games.
+
+## Compiling from the source
+
+Sadly, there is extremely little information around creating native Xbox 360 programs. If you are interested in creating or modifying Xbox 360 programs, I would recommend taking a look at [ClementDreptin's ModdingResources](https://github.com/ClementDreptin/ModdingResources/). While it is mainly focussed on developing dashlaunch plugings for modding games, much of the information applies to creating homebrew as well. 
+
+1. Install Visual Studio 2010 and the official XDK
+2. From within Visual Studio 2010, open *free60 store.sln*
+3. Build each project individualy, ensuring you finish by building XboxTLS
+4. In the *Release* folder, find *XboxTLS.xex*. Transfer this to your console and launch it. 
+
+## Credits
+
+Many thanks to all of the open source projects that made this possible, including:
+
+* [XboxTLS](https://github.com/JakobRangel/XboxTLS) by JakobRangel, for encrypted HTTPS communication
+* [Simple 360 Nand Flasher](https://github.com/Swizzy/XDK_Projects) by Swizzy, to use as a base project to work from, as well as providing a simple, easy to use interface to output console style text to the screen
+* [extract-xiso](https://github.com/XboxDev/extract-xiso) by XboxDev, modified to extract ISO files directly on the Xbox itself
+* [LZMA SDK](https://www.7-zip.org/sdk.html), to decompress LZMA and LZMA 2 compressed 7z files
+
+## Disclaimers
+
+* Firstly, while this program should not harm your Xbox 360 in any way, it is still in a very early alpha phase. As with all homebrew, run it at your own risk
+* This program is in a very early alpha phase, and should be treated as a proof-of-concept. Bugs should be expected
+* Depending on your local law, it may or may not be legal for you to download games with this tool. I take ABSOLUTELY NO RESPONSIBILITY for your actions
+* AI. Yes, I used it. While this project is **not** vibecoded, there are many portions of this project where I made use of AI to **assist** in writing parts of the code
+* This project has no intention of being affiliated with the free60 project. If you do not approve of this project's name, please let me know
+
+## TODO
+
+* Clean up the very messy code
+* Optimise 7z decompression
+* Eliminate memory leaks
+* Impliment a better UI using xUI
+* Add support to download from ROMSFUN using flaresolver proxy
+* Potentially make use of the [triangle](https://github.com/JakobRangel/Triangle) frontend when it is made open source

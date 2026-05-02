@@ -12,6 +12,6 @@ DWORD OpenKeyboardToString(
     LPCWSTR defaultText
 );
 
-int showUI(char *gameURL, int len);
+int showUI(char *gameURL, int len, char *gameName, int gameNameLen);
 
 #endif

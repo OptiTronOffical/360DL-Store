@@ -314,7 +314,7 @@ DWORD OpenKeyboardToString(
     return ERROR_SUCCESS;
 }
 
-int showUI(char *gameURL, int len)
+int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 {
     const unsigned long long HTML_BUFFER_CAPACITY = 1024 * 1024 * 4;
     unsigned long long OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
@@ -370,10 +370,10 @@ int showUI(char *gameURL, int len)
     std::string selectedURL = "https://vimm.net";
     selectedURL.append(list.items[selected].link);
 
-    if (gameURL && len > 0)
+    if (gameName && gameNameLen > 0)
     {
-        strncpy(gameURL, selectedURL.c_str(), len - 1);
-        gameURL[len - 1] = '\0';
+        strncpy(gameName, list.items[selected].name, gameNameLen - 1);
+        gameName[gameNameLen - 1] = '\0';
     }
 
     ClearConsole();

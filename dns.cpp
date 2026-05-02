@@ -13,7 +13,7 @@ struct DnsCacheEntry
 static const DnsCacheEntry dnsCache[] =
 {
     // DNS fallback entries should use dotted IPv4 strings, e.g. "203.0.113.10".
-    {"education.standalonepowerandpump.com.au", "158.180.5.90"}
+    {"example.com", "0.0.0.0"}
 };
 
 /**

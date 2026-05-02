@@ -488,6 +488,12 @@ char *getcwd(
 int deleteDirectory(const char *directoryToDelete, const size_t len)
 {
     DIR *dir = opendir(directoryToDelete);
+
+    if(dir == NULL) {
+        printf("Failed to open %s\n", directoryToDelete);
+        return EXIT_FAILURE;
+    }
+
     struct dirent *entity;
     entity = readdir(dir);
     while (entity != NULL)

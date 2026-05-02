@@ -36,4 +36,7 @@ char *getcwd(
     char *buffer,
     int maxlen);
 
+// Deletes a directory and all of its contents
+int deleteDirectory(const char *directoryToDelete, const size_t len);
+
 #endif
