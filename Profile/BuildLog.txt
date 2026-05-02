@@ -1,0 +1,666 @@
+﻿Build started 22/04/2026 9:37:47 AM.
+     1>Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\XboxTLS2.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Profile\XboxTLS.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Xbox 360 SDK\bin\win32\CL.exe /c /Zi /nologo /W3 /WX- /Ox /Os /D NDEBUG /D _XBOX /D PROFILE /GF /Gm- /MT /GS- /Gy /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /GR- /openmp- /Yu"StdAfx.h" /Fp"C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\Profile\XboxTLS.pch" /Fo"Profile\\" /Fd"Profile\vc100.pdb" /TP Debug.cpp ExampleClient.cpp SSL\aead\ccm.c SSL\aead\eax.c SSL\aead\gcm.c SSL\codec\ccopy.c SSL\codec\dec16be.c SSL\codec\dec16le.c SSL\codec\dec32be.c SSL\codec\dec32le.c SSL\codec\dec64be.c SSL\codec\dec64le.c SSL\codec\enc16be.c SSL\codec\enc16le.c SSL\codec\enc32be.c SSL\codec\enc32le.c SSL\codec\enc64be.c SSL\codec\enc64le.c SSL\codec\pemdec.c SSL\codec\pemenc.c SSL\ec\ecdsa_atr.c SSL\ec\ecdsa_default_sign_asn1.c SSL\ec\ecdsa_default_sign_raw.c SSL\ec\ecdsa_default_vrfy_asn1.c SSL\ec\ecdsa_default_vrfy_raw.c SSL\ec\ecdsa_i15_bits.c SSL\ec\ecdsa_i15_sign_asn1.c SSL\ec\ecdsa_i15_sign_raw.c SSL\ec\ecdsa_i15_vrfy_asn1.c SSL\ec\ecdsa_i15_vrfy_raw.c SSL\ec\ecdsa_i31_bits.c SSL\ec\ecdsa_i31_sign_asn1.c SSL\ec\ecdsa_i31_sign_raw.c SSL\ec\ecdsa_i31_vrfy_asn1.c SSL\ec\ecdsa_i31_vrfy_raw.c SSL\ec\ecdsa_rta.c SSL\ec\ec_all_m15.c SSL\ec\ec_all_m31.c SSL\ec\ec_c25519_i15.c SSL\ec\ec_c25519_i31.c SSL\ec\ec_c25519_m15.c SSL\ec\ec_c25519_m31.c SSL\ec\ec_c25519_m62.c SSL\ec\ec_c25519_m64.c SSL\ec\ec_curve25519.c SSL\ec\ec_default.c SSL\ec\ec_keygen.c SSL\ec\ec_p256_m15.c SSL\ec\ec_p256_m31.c SSL\ec\ec_p256_m62.c SSL\ec\ec_p256_m64.c SSL\ec\ec_prime_i15.c SSL\ec\ec_prime_i31.c SSL\ec\ec_pubkey.c SSL\ec\ec_secp256r1.c SSL\ec\ec_secp384r1.c SSL\ec\ec_secp521r1.c SSL\hash\dig_oid.c SSL\hash\dig_size.c SSL\hash\ghash_ctmul.c SSL\hash\ghash_ctmul32.c SSL\hash\ghash_ctmul64.c SSL\hash\ghash_pclmul.c SSL\hash\ghash_pwr8.c SSL\hash\md5.c SSL\hash\md5sha1.c SSL\hash\mgf1.c SSL\hash\multihash.c SSL\hash\sha1.c SSL\hash\sha2big.c SSL\hash\sha2small.c SSL\int\i15_add.c SSL\int\i15_bitlen.c SSL\int\i15_decmod.c SSL\int\i15_decode.c SSL\int\i15_decred.c SSL\int\i15_encode.c SSL\int\i15_fmont.c SSL\int\i15_iszero.c SSL\int\i15_moddiv.c SSL\int\i15_modpow.c SSL\int\i15_modpow2.c SSL\int\i15_montmul.c SSL\int\i15_mulacc.c SSL\int\i15_muladd.c SSL\int\i15_ninv15.c SSL\int\i15_reduce.c SSL\int\i15_rshift.c SSL\int\i15_sub.c SSL\int\i15_tmont.c SSL\int\i31_add.c SSL\int\i31_bitlen.c SSL\int\i31_decmod.c SSL\int\i31_decode.c SSL\int\i31_decred.c SSL\int\i31_encode.c SSL\int\i31_fmont.c SSL\int\i31_iszero.c SSL\int\i31_moddiv.c SSL\int\i31_modpow.c SSL\int\i31_modpow2.c SSL\int\i31_montmul.c SSL\int\i31_mulacc.c SSL\int\i31_muladd.c SSL\int\i31_ninv31.c SSL\int\i31_reduce.c SSL\int\i31_rshift.c SSL\int\i31_sub.c SSL\int\i31_tmont.c SSL\int\i32_add.c SSL\int\i32_bitlen.c SSL\int\i32_decmod.c SSL\int\i32_decode.c SSL\int\i32_decred.c SSL\int\i32_div32.c SSL\int\i32_encode.c SSL\int\i32_fmont.c SSL\int\i32_iszero.c SSL\int\i32_modpow.c SSL\int\i32_montmul.c SSL\int\i32_mulacc.c SSL\int\i32_muladd.c SSL\int\i32_ninv32.c SSL\int\i32_reduce.c SSL\int\i32_sub.c SSL\int\i32_tmont.c SSL\int\i62_modpow2.c SSL\mac\hmac.c SSL\mac\hmac_ct.c SSL\rand\aesctr_drbg.c SSL\rand\hmac_drbg.c SSL\rand\sysrng.c SSL\rsa\rsa_default_keygen.c SSL\rsa\rsa_default_modulus.c SSL\rsa\rsa_default_oaep_decrypt.c SSL\rsa\rsa_default_oaep_encrypt.c SSL\rsa\rsa_default_pkcs1_sign.c SSL\rsa\rsa_default_pkcs1_vrfy.c SSL\rsa\rsa_default_priv.c SSL\rsa\rsa_default_privexp.c SSL\rsa\rsa_default_pss_sign.c SSL\rsa\rsa_default_pss_vrfy.c SSL\rsa\rsa_default_pub.c SSL\rsa\rsa_default_pubexp.c SSL\rsa\rsa_i15_keygen.c SSL\rsa\rsa_i15_modulus.c SSL\rsa\rsa_i15_oaep_decrypt.c SSL\rsa\rsa_i15_oaep_encrypt.c SSL\rsa\rsa_i15_pkcs1_sign.c SSL\rsa\rsa_i15_pkcs1_vrfy.c SSL\rsa\rsa_i15_priv.c SSL\rsa\rsa_i15_privexp.c SSL\rsa\rsa_i15_pss_sign.c SSL\rsa\rsa_i15_pss_vrfy.c SSL\rsa\rsa_i15_pub.c SSL\rsa\rsa_i15_pubexp.c SSL\rsa\rsa_i31_keygen.c SSL\rsa\rsa_i31_keygen_inner.c SSL\rsa\rsa_i31_modulus.c SSL\rsa\rsa_i31_oaep_decrypt.c SSL\rsa\rsa_i31_oaep_encrypt.c SSL\rsa\rsa_i31_pkcs1_sign.c SSL\rsa\rsa_i31_pkcs1_vrfy.c SSL\rsa\rsa_i31_priv.c SSL\rsa\rsa_i31_privexp.c SSL\rsa\rsa_i31_pss_sign.c SSL\rsa\rsa_i31_pss_vrfy.c SSL\rsa\rsa_i31_pub.c SSL\rsa\rsa_i31_pubexp.c SSL\rsa\rsa_i32_oaep_decrypt.c SSL\rsa\rsa_i32_oaep_encrypt.c SSL\rsa\rsa_i32_pkcs1_sign.c SSL\rsa\rsa_i32_pkcs1_vrfy.c SSL\rsa\rsa_i32_priv.c SSL\rsa\rsa_i32_pss_sign.c SSL\rsa\rsa_i32_pss_vrfy.c SSL\rsa\rsa_i32_pub.c SSL\rsa\rsa_i62_keygen.c SSL\rsa\rsa_i62_oaep_decrypt.c SSL\rsa\rsa_i62_oaep_encrypt.c SSL\rsa\rsa_i62_pkcs1_sign.c SSL\rsa\rsa_i62_pkcs1_vrfy.c SSL\rsa\rsa_i62_priv.c SSL\rsa\rsa_i62_pss_sign.c SSL\rsa\rsa_i62_pss_vrfy.c SSL\rsa\rsa_i62_pub.c SSL\rsa\rsa_oaep_pad.c SSL\rsa\rsa_oaep_unpad.c SSL\rsa\rsa_pkcs1_sig_pad.c SSL\rsa\rsa_pkcs1_sig_unpad.c SSL\rsa\rsa_pss_sig_pad.c SSL\rsa\rsa_pss_sig_unpad.c SSL\rsa\rsa_ssl_decrypt.c SSL\settings.c SSL\ssl\prf.c SSL\ssl\prf_md5sha1.c SSL\ssl\prf_sha256.c SSL\ssl\prf_sha384.c SSL\ssl\ssl_ccert_single_ec.c SSL\ssl\ssl_ccert_single_rsa.c SSL\ssl\ssl_client.c SSL\ssl\ssl_client_default_rsapub.c SSL\ssl\ssl_client_full.c SSL\ssl\ssl_engine.c SSL\ssl\ssl_engine_default_aescbc.c SSL\ssl\ssl_engine_default_aesccm.c SSL\ssl\ssl_engine_default_aesgcm.c SSL\ssl\ssl_engine_default_chapol.c SSL\ssl\ssl_engine_default_descbc.c SSL\ssl\ssl_engine_default_ec.c SSL\ssl\ssl_engine_default_ecdsa.c SSL\ssl\ssl_engine_default_rsavrfy.c SSL\ssl\ssl_hashes.c SSL\ssl\ssl_hs_client.c SSL\ssl\ssl_hs_server.c SSL\ssl\ssl_io.c SSL\ssl\ssl_keyexport.c SSL\ssl\ssl_lru.c SSL\ssl\ssl_rec_cbc.c SSL\ssl\ssl_rec_ccm.c SSL\ssl\ssl_rec_chapol.c SSL\ssl\ssl_rec_gcm.c SSL\ssl\ssl_scert_single_ec.c SSL\ssl\ssl_scert_single_rsa.c SSL\ssl\ssl_server.c SSL\ssl\ssl_server_full_ec.c SSL\ssl\ssl_server_full_rsa.c SSL\ssl\ssl_server_mine2c.c SSL\ssl\ssl_server_mine2g.c SSL\ssl\ssl_server_minf2c.c SSL\ssl\ssl_server_minf2g.c SSL\ssl\ssl_server_minr2g.c SSL\ssl\ssl_server_minu2g.c SSL\ssl\ssl_server_minv2g.c SSL\symcipher\aes_big_cbcdec.c SSL\symcipher\aes_big_cbcenc.c SSL\symcipher\aes_big_ctr.c SSL\symcipher\aes_big_ctrcbc.c SSL\symcipher\aes_big_dec.c SSL\symcipher\aes_big_enc.c SSL\symcipher\aes_common.c SSL\symcipher\aes_ct.c SSL\symcipher\aes_ct64.c SSL\symcipher\aes_ct64_cbcdec.c SSL\symcipher\aes_ct64_cbcenc.c SSL\symcipher\aes_ct64_ctr.c SSL\symcipher\aes_ct64_ctrcbc.c SSL\symcipher\aes_ct64_dec.c SSL\symcipher\aes_ct64_enc.c SSL\symcipher\aes_ct_cbcdec.c SSL\symcipher\aes_ct_cbcenc.c SSL\symcipher\aes_ct_ctr.c SSL\symcipher\aes_ct_ctrcbc.c SSL\symcipher\aes_ct_dec.c SSL\symcipher\aes_ct_enc.c SSL\symcipher\aes_pwr8.c SSL\symcipher\aes_pwr8_cbcdec.c SSL\symcipher\aes_pwr8_cbcenc.c SSL\symcipher\aes_pwr8_ctr.c SSL\symcipher\aes_pwr8_ctrcbc.c SSL\symcipher\aes_small_cbcdec.c SSL\symcipher\aes_small_cbcenc.c SSL\symcipher\aes_small_ctr.c SSL\symcipher\aes_small_ctrcbc.c SSL\symcipher\aes_small_dec.c SSL\symcipher\aes_small_enc.c SSL\symcipher\aes_x86ni.c SSL\symcipher\aes_x86ni_cbcdec.c SSL\symcipher\aes_x86ni_cbcenc.c SSL\symcipher\aes_x86ni_ctr.c SSL\symcipher\aes_x86ni_ctrcbc.c SSL\symcipher\chacha20_ct.c SSL\symcipher\chacha20_sse2.c SSL\symcipher\des_ct.c SSL\symcipher\des_ct_cbcdec.c SSL\symcipher\des_ct_cbcenc.c SSL\symcipher\des_support.c SSL\symcipher\des_tab.c SSL\symcipher\des_tab_cbcdec.c SSL\symcipher\des_tab_cbcenc.c SSL\symcipher\poly1305_ctmul.c SSL\symcipher\poly1305_ctmul32.c SSL\symcipher\poly1305_ctmulq.c SSL\symcipher\poly1305_i15.c SSL\x509\asn1enc.c SSL\x509\encode_ec_pk8der.c SSL\x509\encode_ec_rawder.c SSL\x509\encode_rsa_pk8der.c SSL\x509\encode_rsa_rawder.c SSL\x509\skey_decoder.c SSL\x509\x509_decoder.c SSL\x509\x509_knownkey.c SSL\x509\x509_minimal.c SSL\x509\x509_minimal_full.c XboxTLS.cpp /callcap /FI"C:\Program Files (x86)\Microsoft Xbox 360 SDK\\include\xbox\xbox_intellisense_platform.h"
+         Debug.cpp
+     1>Debug.cpp(50): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ExampleClient.cpp
+     1>ExampleClient.cpp(209): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ccm.c
+     1>SSL\aead\ccm.c(347): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         eax.c
+     1>SSL\aead\eax.c(526): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         gcm.c
+     1>SSL\aead\gcm.c(319): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ccopy.c
+     1>SSL\codec\ccopy.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec16be.c
+     1>SSL\codec\dec16be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec16le.c
+     1>SSL\codec\dec16le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec32be.c
+     1>SSL\codec\dec32be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec32le.c
+     1>SSL\codec\dec32le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec64be.c
+     1>SSL\codec\dec64be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dec64le.c
+     1>SSL\codec\dec64le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc16be.c
+     1>SSL\codec\enc16be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc16le.c
+     1>SSL\codec\enc16le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc32be.c
+     1>SSL\codec\enc32be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc32le.c
+     1>SSL\codec\enc32le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc64be.c
+     1>SSL\codec\enc64be.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         enc64le.c
+     1>SSL\codec\enc64le.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         pemdec.c
+     1>SSL\codec\pemdec.c(527): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         pemenc.c
+     1>SSL\codec\pemenc.c(174): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         ecdsa_atr.c
+     1>SSL\ec\ecdsa_atr.c(135): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_default_sign_asn1.c
+     1>SSL\ec\ecdsa_default_sign_asn1.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_default_sign_raw.c
+     1>SSL\ec\ecdsa_default_sign_raw.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_default_vrfy_asn1.c
+     1>SSL\ec\ecdsa_default_vrfy_asn1.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_default_vrfy_raw.c
+     1>SSL\ec\ecdsa_default_vrfy_raw.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i15_bits.c
+     1>SSL\ec\ecdsa_i15_bits.c(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i15_sign_asn1.c
+     1>SSL\ec\ecdsa_i15_sign_asn1.c(46): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i15_sign_raw.c
+     1>SSL\ec\ecdsa_i15_sign_raw.c(175): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i15_vrfy_asn1.c
+     1>SSL\ec\ecdsa_i15_vrfy_asn1.c(49): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i15_vrfy_raw.c
+     1>SSL\ec\ecdsa_i15_vrfy_raw.c(167): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i31_bits.c
+     1>SSL\ec\ecdsa_i31_bits.c(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i31_sign_asn1.c
+     1>SSL\ec\ecdsa_i31_sign_asn1.c(46): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i31_sign_raw.c
+     1>SSL\ec\ecdsa_i31_sign_raw.c(174): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i31_vrfy_asn1.c
+     1>SSL\ec\ecdsa_i31_vrfy_asn1.c(49): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_i31_vrfy_raw.c
+     1>SSL\ec\ecdsa_i31_vrfy_raw.c(166): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ecdsa_rta.c
+     1>SSL\ec\ecdsa_rta.c(122): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_all_m15.c
+     1>SSL\ec\ec_all_m15.c(122): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_all_m31.c
+     1>SSL\ec\ec_all_m31.c(172): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_c25519_i15.c
+     1>SSL\ec\ec_c25519_i15.c(399): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_c25519_i31.c
+     1>SSL\ec\ec_c25519_i31.c(391): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         ec_c25519_m15.c
+     1>SSL\ec\ec_c25519_m15.c(86): warning C4005: 'ARSH' : macro redefinition
+                 SSL\ec\ec_c25519_m15.c(84) : see previous definition of 'ARSH'
+     1>SSL\ec\ec_c25519_m15.c(1480): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_c25519_m31.c
+     1>SSL\ec\ec_c25519_m31.c(86): warning C4005: 'ARSH' : macro redefinition
+                 SSL\ec\ec_c25519_m31.c(84) : see previous definition of 'ARSH'
+     1>SSL\ec\ec_c25519_m31.c(801): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_c25519_m62.c
+     1>SSL\ec\ec_c25519_m62.c(179): warning C4005: 'UMUL51' : macro redefinition
+                 SSL\ec\ec_c25519_m62.c(170) : see previous definition of 'UMUL51'
+     1>SSL\ec\ec_c25519_m62.c(606): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_c25519_m64.c
+     1>SSL\ec\ec_c25519_m64.c(832): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_curve25519.c
+     1>SSL\ec\ec_curve25519.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_default.c
+     1>SSL\ec\ec_default.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_keygen.c
+     1>SSL\ec\ec_keygen.c(87): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_p256_m15.c
+     1>SSL\ec\ec_p256_m15.c(41): warning C4005: 'ARSH' : macro redefinition
+                 SSL\ec\ec_p256_m15.c(39) : see previous definition of 'ARSH'
+     1>SSL\ec\ec_p256_m15.c(2126): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_p256_m31.c
+     1>SSL\ec\ec_p256_m31.c(43): warning C4005: 'ARSH' : macro redefinition
+                 SSL\ec\ec_p256_m31.c(39) : see previous definition of 'ARSH'
+     1>SSL\ec\ec_p256_m31.c(44): warning C4005: 'ARSHW' : macro redefinition
+                 SSL\ec\ec_p256_m31.c(41) : see previous definition of 'ARSHW'
+     1>SSL\ec\ec_p256_m31.c(1471): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_p256_m62.c
+     1>SSL\ec\ec_p256_m62.c(1767): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_p256_m64.c
+     1>SSL\ec\ec_p256_m64.c(1783): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_prime_i15.c
+     1>SSL\ec\ec_prime_i15.c(825): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_prime_i31.c
+     1>SSL\ec\ec_prime_i31.c(827): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_pubkey.c
+     1>SSL\ec\ec_pubkey.c(86): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_secp256r1.c
+     1>SSL\ec\ec_secp256r1.c(52): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_secp384r1.c
+     1>SSL\ec\ec_secp384r1.c(58): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ec_secp521r1.c
+     1>SSL\ec\ec_secp521r1.c(65): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dig_oid.c
+     1>SSL\hash\dig_oid.c(85): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         dig_size.c
+     1>SSL\hash\dig_size.c(51): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ghash_ctmul.c
+     1>SSL\hash\ghash_ctmul.c(346): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         ghash_ctmul32.c
+     1>SSL\hash\ghash_ctmul32.c(252): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ghash_ctmul64.c
+     1>SSL\hash\ghash_ctmul64.c(155): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ghash_pclmul.c
+     1>SSL\hash\ghash_pclmul.c(104): warning C4005: 'BYTESWAP_DECL' : macro redefinition
+                 SSL\hash\ghash_pclmul.c(91) : see previous definition of 'BYTESWAP_DECL'
+     1>SSL\hash\ghash_pclmul.c(108): warning C4005: 'BYTESWAP_PREP' : macro redefinition
+                 SSL\hash\ghash_pclmul.c(92) : see previous definition of 'BYTESWAP_PREP'
+     1>SSL\hash\ghash_pclmul.c(111): warning C4005: 'BYTESWAP' : macro redefinition
+                 SSL\hash\ghash_pclmul.c(102) : see previous definition of 'BYTESWAP'
+     1>SSL\hash\ghash_pclmul.c(390): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ghash_pwr8.c
+     1>SSL\hash\ghash_pwr8.c(78): warning C4005: 'INIT_BSW' : macro redefinition
+                 SSL\hash\ghash_pwr8.c(75) : see previous definition of 'INIT_BSW'
+     1>SSL\hash\ghash_pwr8.c(79): warning C4005: 'FIX_ENDIAN' : macro redefinition
+                 SSL\hash\ghash_pwr8.c(76) : see previous definition of 'FIX_ENDIAN'
+     1>SSL\hash\ghash_pwr8.c(412): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         md5.c
+     1>SSL\hash\md5.c(209): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         md5sha1.c
+     1>SSL\hash\md5sha1.c(142): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         mgf1.c
+     1>SSL\hash\mgf1.c(57): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         multihash.c
+     1>SSL\hash\multihash.c(167): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         sha1.c
+     1>SSL\hash\sha1.c(192): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         sha2big.c
+     1>SSL\hash\sha2big.c(286): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         sha2small.c
+     1>SSL\hash\sha2small.c(342): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_add.c
+     1>SSL\int\i15_add.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_bitlen.c
+     1>SSL\int\i15_bitlen.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_decmod.c
+     1>SSL\int\i15_decmod.c(125): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_decode.c
+     1>SSL\int\i15_decode.c(57): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_decred.c
+     1>SSL\int\i15_decred.c(101): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_encode.c
+     1>SSL\int\i15_encode.c(57): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_fmont.c
+     1>SSL\int\i15_fmont.c(60): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_iszero.c
+     1>SSL\int\i15_iszero.c(40): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_moddiv.c
+     1>SSL\int\i15_moddiv.c(466): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         i15_modpow.c
+     1>SSL\int\i15_modpow.c(51): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_modpow2.c
+     1>SSL\int\i15_modpow2.c(161): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_montmul.c
+     1>SSL\int\i15_montmul.c(185): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_mulacc.c
+     1>SSL\int\i15_mulacc.c(62): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_muladd.c
+     1>SSL\int\i15_muladd.c(174): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_ninv15.c
+     1>SSL\int\i15_ninv15.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_reduce.c
+     1>SSL\int\i15_reduce.c(67): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_rshift.c
+     1>SSL\int\i15_rshift.c(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_sub.c
+     1>SSL\int\i15_sub.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i15_tmont.c
+     1>SSL\int\i15_tmont.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_add.c
+     1>SSL\int\i31_add.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_bitlen.c
+     1>SSL\int\i31_bitlen.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_decmod.c
+     1>SSL\int\i31_decmod.c(125): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_decode.c
+     1>SSL\int\i31_decode.c(58): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_decred.c
+     1>SSL\int\i31_decred.c(104): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_encode.c
+     1>SSL\int\i31_encode.c(80): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_fmont.c
+     1>SSL\int\i31_fmont.c(61): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_iszero.c
+     1>SSL\int\i31_iszero.c(40): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_moddiv.c
+     1>SSL\int\i31_moddiv.c(489): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_modpow.c
+     1>SSL\int\i31_modpow.c(66): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         i31_modpow2.c
+     1>SSL\int\i31_modpow2.c(161): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_montmul.c
+     1>SSL\int\i31_montmul.c(128): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_mulacc.c
+     1>SSL\int\i31_mulacc.c(75): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_muladd.c
+     1>SSL\int\i31_muladd.c(158): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_ninv31.c
+     1>SSL\int\i31_ninv31.c(40): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_reduce.c
+     1>SSL\int\i31_reduce.c(67): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_rshift.c
+     1>SSL\int\i31_rshift.c(48): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_sub.c
+     1>SSL\int\i31_sub.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i31_tmont.c
+     1>SSL\int\i31_tmont.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_add.c
+     1>SSL\int\i32_add.c(52): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_bitlen.c
+     1>SSL\int\i32_bitlen.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_decmod.c
+     1>SSL\int\i32_decmod.c(78): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_decode.c
+     1>SSL\int\i32_decode.c(64): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_decred.c
+     1>SSL\int\i32_decred.c(108): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_div32.c
+     1>SSL\int\i32_div32.c(57): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_encode.c
+     1>SSL\int\i32_encode.c(73): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_fmont.c
+     1>SSL\int\i32_fmont.c(61): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_iszero.c
+     1>SSL\int\i32_iszero.c(40): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_modpow.c
+     1>SSL\int\i32_modpow.c(66): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_montmul.c
+     1>SSL\int\i32_montmul.c(70): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         i32_mulacc.c
+     1>SSL\int\i32_mulacc.c(57): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_muladd.c
+     1>SSL\int\i32_muladd.c(139): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_ninv32.c
+     1>SSL\int\i32_ninv32.c(40): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_reduce.c
+     1>SSL\int\i32_reduce.c(67): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_sub.c
+     1>SSL\int\i32_sub.c(52): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i32_tmont.c
+     1>SSL\int\i32_tmont.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         i62_modpow2.c
+     1>SSL\int\i62_modpow2.c(72): warning C4005: 'FMA1' : macro redefinition
+                 SSL\int\i62_modpow2.c(41) : see previous definition of 'FMA1'
+     1>SSL\int\i62_modpow2.c(90): warning C4005: 'FMA2' : macro redefinition
+                 SSL\int\i62_modpow2.c(58) : see previous definition of 'FMA2'
+     1>SSL\int\i62_modpow2.c(494): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         hmac.c
+     1>SSL\mac\hmac.c(123): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         hmac_ct.c
+     1>SSL\mac\hmac_ct.c(194): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aesctr_drbg.c
+     1>SSL\rand\aesctr_drbg.c(207): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         hmac_drbg.c
+     1>SSL\rand\hmac_drbg.c(158): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         sysrng.c
+     1>SSL\rand\sysrng.c(211): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_keygen.c
+     1>SSL\rsa\rsa_default_keygen.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_modulus.c
+     1>SSL\rsa\rsa_default_modulus.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_oaep_decrypt.c
+     1>SSL\rsa\rsa_default_oaep_decrypt.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_oaep_encrypt.c
+     1>SSL\rsa\rsa_default_oaep_encrypt.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_pkcs1_sign.c
+     1>SSL\rsa\rsa_default_pkcs1_sign.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_pkcs1_vrfy.c
+     1>SSL\rsa\rsa_default_pkcs1_vrfy.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_priv.c
+     1>SSL\rsa\rsa_default_priv.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_privexp.c
+     1>SSL\rsa\rsa_default_privexp.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         rsa_default_pss_sign.c
+     1>SSL\rsa\rsa_default_pss_sign.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_pss_vrfy.c
+     1>SSL\rsa\rsa_default_pss_vrfy.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_pub.c
+     1>SSL\rsa\rsa_default_pub.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_default_pubexp.c
+     1>SSL\rsa\rsa_default_pubexp.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_keygen.c
+     1>SSL\rsa\rsa_i15_keygen.c(584): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_modulus.c
+     1>SSL\rsa\rsa_i15_modulus.c(100): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_oaep_decrypt.c
+     1>SSL\rsa\rsa_i15_oaep_decrypt.c(42): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_oaep_encrypt.c
+     1>SSL\rsa\rsa_i15_oaep_encrypt.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pkcs1_sign.c
+     1>SSL\rsa\rsa_i15_pkcs1_sign.c(38): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pkcs1_vrfy.c
+     1>SSL\rsa\rsa_i15_pkcs1_vrfy.c(44): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_priv.c
+     1>SSL\rsa\rsa_i15_priv.c(210): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_privexp.c
+     1>SSL\rsa\rsa_i15_privexp.c(321): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pss_sign.c
+     1>SSL\rsa\rsa_i15_pss_sign.c(41): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pss_vrfy.c
+     1>SSL\rsa\rsa_i15_pss_vrfy.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pub.c
+     1>SSL\rsa\rsa_i15_pub.c(114): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i15_pubexp.c
+     1>SSL\rsa\rsa_i15_pubexp.c(153): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_keygen.c
+     1>SSL\rsa\rsa_i31_keygen.c(38): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_keygen_inner.c
+     1>SSL\rsa\rsa_i31_keygen_inner.c(609): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_modulus.c
+     1>SSL\rsa\rsa_i31_modulus.c(100): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_oaep_decrypt.c
+     1>SSL\rsa\rsa_i31_oaep_decrypt.c(42): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         rsa_i31_oaep_encrypt.c
+     1>SSL\rsa\rsa_i31_oaep_encrypt.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pkcs1_sign.c
+     1>SSL\rsa\rsa_i31_pkcs1_sign.c(38): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pkcs1_vrfy.c
+     1>SSL\rsa\rsa_i31_pkcs1_vrfy.c(44): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_priv.c
+     1>SSL\rsa\rsa_i31_priv.c(204): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_privexp.c
+     1>SSL\rsa\rsa_i31_privexp.c(319): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pss_sign.c
+     1>SSL\rsa\rsa_i31_pss_sign.c(41): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pss_vrfy.c
+     1>SSL\rsa\rsa_i31_pss_vrfy.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pub.c
+     1>SSL\rsa\rsa_i31_pub.c(107): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i31_pubexp.c
+     1>SSL\rsa\rsa_i31_pubexp.c(153): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_oaep_decrypt.c
+     1>SSL\rsa\rsa_i32_oaep_decrypt.c(42): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_oaep_encrypt.c
+     1>SSL\rsa\rsa_i32_oaep_encrypt.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_pkcs1_sign.c
+     1>SSL\rsa\rsa_i32_pkcs1_sign.c(38): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_pkcs1_vrfy.c
+     1>SSL\rsa\rsa_i32_pkcs1_vrfy.c(44): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_priv.c
+     1>SSL\rsa\rsa_i32_priv.c(161): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_pss_sign.c
+     1>SSL\rsa\rsa_i32_pss_sign.c(41): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_pss_vrfy.c
+     1>SSL\rsa\rsa_i32_pss_vrfy.c(45): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i32_pub.c
+     1>SSL\rsa\rsa_i32_pub.c(78): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_keygen.c
+     1>SSL\rsa\rsa_i62_keygen.c(58): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_oaep_decrypt.c
+     1>SSL\rsa\rsa_i62_oaep_decrypt.c(62): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_oaep_encrypt.c
+     1>SSL\rsa\rsa_i62_oaep_encrypt.c(65): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         rsa_i62_pkcs1_sign.c
+     1>SSL\rsa\rsa_i62_pkcs1_sign.c(58): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_pkcs1_vrfy.c
+     1>SSL\rsa\rsa_i62_pkcs1_vrfy.c(64): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_priv.c
+     1>SSL\rsa\rsa_i62_priv.c(224): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_pss_sign.c
+     1>SSL\rsa\rsa_i62_pss_sign.c(61): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_pss_vrfy.c
+     1>SSL\rsa\rsa_i62_pss_vrfy.c(65): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_i62_pub.c
+     1>SSL\rsa\rsa_i62_pub.c(126): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_oaep_pad.c
+     1>SSL\rsa\rsa_oaep_pad.c(113): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_oaep_unpad.c
+     1>SSL\rsa\rsa_oaep_unpad.c(146): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_pkcs1_sig_pad.c
+     1>SSL\rsa\rsa_pkcs1_sig_pad.c(101): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_pkcs1_sig_unpad.c
+     1>SSL\rsa\rsa_pkcs1_sig_unpad.c(122): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_pss_sig_pad.c
+     1>SSL\rsa\rsa_pss_sig_pad.c(107): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_pss_sig_unpad.c
+     1>SSL\rsa\rsa_pss_sig_unpad.c(122): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         rsa_ssl_decrypt.c
+     1>SSL\rsa\rsa_ssl_decrypt.c(53): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         settings.c
+     1>SSL\settings.c(307): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         prf.c
+     1>SSL\ssl\prf.c(74): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         prf_md5sha1.c
+     1>SSL\ssl\prf_md5sha1.c(44): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         prf_sha256.c
+     1>SSL\ssl\prf_sha256.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         prf_sha384.c
+     1>SSL\ssl\prf_sha384.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_ccert_single_ec.c
+     1>SSL\ssl\ssl_ccert_single_ec.c(158): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_ccert_single_rsa.c
+     1>SSL\ssl\ssl_ccert_single_rsa.c(150): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         ssl_client.c
+     1>SSL\ssl\ssl_client.c(79): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_client_default_rsapub.c
+     1>SSL\ssl\ssl_client_default_rsapub.c(33): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_client_full.c
+     1>SSL\ssl\ssl_client_full.c(231): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine.c
+     1>SSL\ssl\ssl_engine.c(1586): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_aescbc.c
+     1>SSL\ssl\ssl_engine_default_aescbc.c(65): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_aesccm.c
+     1>SSL\ssl\ssl_engine_default_aesccm.c(68): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_aesgcm.c
+     1>SSL\ssl\ssl_engine_default_aesgcm.c(90): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_chapol.c
+     1>SSL\ssl\ssl_engine_default_chapol.c(66): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_descbc.c
+     1>SSL\ssl\ssl_engine_default_descbc.c(38): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_ec.c
+     1>SSL\ssl\ssl_engine_default_ec.c(37): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_ecdsa.c
+     1>SSL\ssl\ssl_engine_default_ecdsa.c(39): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_engine_default_rsavrfy.c
+     1>SSL\ssl\ssl_engine_default_rsavrfy.c(33): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_hashes.c
+     1>SSL\ssl\ssl_hashes.c(47): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_hs_client.c
+     1>SSL\ssl\ssl_hs_client.c(1917): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_hs_server.c
+     1>SSL\ssl\ssl_hs_server.c(2011): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_io.c
+     1>SSL\ssl\ssl_io.c(262): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_keyexport.c
+     1>SSL\ssl\ssl_keyexport.c(84): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_lru.c
+     1>SSL\ssl\ssl_lru.c(538): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_rec_cbc.c
+     1>SSL\ssl\ssl_rec_cbc.c(441): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_rec_ccm.c
+     1>SSL\ssl\ssl_rec_ccm.c(214): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         ssl_rec_chapol.c
+     1>SSL\ssl\ssl_rec_chapol.c(178): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_rec_gcm.c
+     1>SSL\ssl\ssl_rec_gcm.c(236): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_scert_single_ec.c
+     1>SSL\ssl\ssl_scert_single_ec.c(143): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_scert_single_rsa.c
+     1>SSL\ssl\ssl_scert_single_rsa.c(163): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server.c
+     1>SSL\ssl\ssl_server.c(53): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_full_ec.c
+     1>SSL\ssl\ssl_server_full_ec.c(150): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_full_rsa.c
+     1>SSL\ssl\ssl_server_full_rsa.c(133): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_mine2c.c
+     1>SSL\ssl\ssl_server_mine2c.c(72): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_mine2g.c
+     1>SSL\ssl\ssl_server_mine2g.c(72): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_minf2c.c
+     1>SSL\ssl\ssl_server_minf2c.c(72): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_minf2g.c
+     1>SSL\ssl\ssl_server_minf2g.c(72): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_minr2g.c
+     1>SSL\ssl\ssl_server_minr2g.c(71): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_minu2g.c
+     1>SSL\ssl\ssl_server_minu2g.c(71): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         ssl_server_minv2g.c
+     1>SSL\ssl\ssl_server_minv2g.c(71): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_cbcdec.c
+     1>SSL\symcipher\aes_big_cbcdec.c(70): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_cbcenc.c
+     1>SSL\symcipher\aes_big_cbcenc.c(68): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_ctr.c
+     1>SSL\symcipher\aes_big_ctr.c(85): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_ctrcbc.c
+     1>SSL\symcipher\aes_big_ctrcbc.c(143): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_dec.c
+     1>SSL\symcipher\aes_big_dec.c(255): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_big_enc.c
+     1>SSL\symcipher\aes_big_enc.c(158): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         aes_common.c
+     1>SSL\symcipher\aes_common.c(113): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct.c
+     1>SSL\symcipher\aes_ct.c(305): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64.c
+     1>SSL\symcipher\aes_ct64.c(399): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_cbcdec.c
+     1>SSL\symcipher\aes_ct64_cbcdec.c(105): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_cbcenc.c
+     1>SSL\symcipher\aes_ct64_cbcenc.c(82): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_ctr.c
+     1>SSL\symcipher\aes_ct64_ctr.c(115): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_ctrcbc.c
+     1>SSL\symcipher\aes_ct64_ctrcbc.c(434): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_dec.c
+     1>SSL\symcipher\aes_ct64_dec.c(160): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct64_enc.c
+     1>SSL\symcipher\aes_ct64_enc.c(116): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_cbcdec.c
+     1>SSL\symcipher\aes_ct_cbcdec.c(112): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_cbcenc.c
+     1>SSL\symcipher\aes_ct_cbcenc.c(92): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_ctr.c
+     1>SSL\symcipher\aes_ct_ctr.c(117): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_ctrcbc.c
+     1>SSL\symcipher\aes_ct_ctrcbc.c(423): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_dec.c
+     1>SSL\symcipher\aes_ct_dec.c(171): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_ct_enc.c
+     1>SSL\symcipher\aes_ct_enc.c(113): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_pwr8.c
+     1>SSL\symcipher\aes_pwr8.c(446): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_pwr8_cbcdec.c
+     1>SSL\symcipher\aes_pwr8_cbcdec.c(671): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_pwr8_cbcenc.c
+     1>SSL\symcipher\aes_pwr8_cbcenc.c(418): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_pwr8_ctr.c
+     1>SSL\symcipher\aes_pwr8_ctr.c(718): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_pwr8_ctrcbc.c
+     1>SSL\symcipher\aes_pwr8_ctrcbc.c(402): warning C4005: 'BYTESWAP_INIT' : macro redefinition
+                 SSL\symcipher\aes_pwr8_ctrcbc.c(397) : see previous definition of 'BYTESWAP_INIT'
+     1>SSL\symcipher\aes_pwr8_ctrcbc.c(403): warning C4005: 'BYTESWAP' : macro redefinition
+                 SSL\symcipher\aes_pwr8_ctrcbc.c(398) : see previous definition of 'BYTESWAP'
+     1>SSL\symcipher\aes_pwr8_ctrcbc.c(404): warning C4005: 'BYTESWAPX' : macro redefinition
+                 SSL\symcipher\aes_pwr8_ctrcbc.c(399) : see previous definition of 'BYTESWAPX'
+     1>SSL\symcipher\aes_pwr8_ctrcbc.c(405): warning C4005: 'BYTESWAP_REG' : macro redefinition
+                 SSL\symcipher\aes_pwr8_ctrcbc.c(400) : see previous definition of 'BYTESWAP_REG'
+     1>SSL\symcipher\aes_pwr8_ctrcbc.c(947): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         aes_small_cbcdec.c
+     1>SSL\symcipher\aes_small_cbcdec.c(70): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_small_cbcenc.c
+     1>SSL\symcipher\aes_small_cbcenc.c(68): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_small_ctr.c
+     1>SSL\symcipher\aes_small_ctr.c(85): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_small_ctrcbc.c
+     1>SSL\symcipher\aes_small_ctrcbc.c(143): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_small_dec.c
+     1>SSL\symcipher\aes_small_dec.c(177): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_small_enc.c
+     1>SSL\symcipher\aes_small_enc.c(130): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_x86ni.c
+     1>SSL\symcipher\aes_x86ni.c(241): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_x86ni_cbcdec.c
+     1>SSL\symcipher\aes_x86ni_cbcdec.c(224): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_x86ni_cbcenc.c
+     1>SSL\symcipher\aes_x86ni_cbcenc.c(123): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_x86ni_ctr.c
+     1>SSL\symcipher\aes_x86ni_ctr.c(212): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         aes_x86ni_ctrcbc.c
+     1>SSL\symcipher\aes_x86ni_ctrcbc.c(597): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         chacha20_ct.c
+     1>SSL\symcipher\chacha20_ct.c(107): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         chacha20_sse2.c
+     1>SSL\symcipher\chacha20_sse2.c(238): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_ct.c
+     1>SSL\symcipher\des_ct.c(412): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_ct_cbcdec.c
+     1>SSL\symcipher\des_ct_cbcdec.c(88): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_ct_cbcenc.c
+     1>SSL\symcipher\des_ct_cbcenc.c(70): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_support.c
+     1>SSL\symcipher\des_support.c(167): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_tab.c
+     1>SSL\symcipher\des_tab.c(311): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_tab_cbcdec.c
+     1>SSL\symcipher\des_tab_cbcdec.c(86): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         des_tab_cbcenc.c
+     1>SSL\symcipher\des_tab_cbcenc.c(68): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+         Compiling...
+         poly1305_ctmul.c
+     1>SSL\symcipher\poly1305_ctmul.c(261): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         poly1305_ctmul32.c
+     1>SSL\symcipher\poly1305_ctmul32.c(298): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         poly1305_ctmulq.c
+     1>SSL\symcipher\poly1305_ctmulq.c(44): warning C4005: 'MUL128' : macro redefinition
+                 SSL\symcipher\poly1305_ctmulq.c(36) : see previous definition of 'MUL128'
+     1>SSL\symcipher\poly1305_ctmulq.c(476): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         poly1305_i15.c
+     1>SSL\symcipher\poly1305_i15.c(222): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         asn1enc.c
+     1>SSL\x509\asn1enc.c(94): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         encode_ec_pk8der.c
+     1>SSL\x509\encode_ec_pk8der.c(111): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         encode_ec_rawder.c
+     1>SSL\x509\encode_ec_rawder.c(162): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         encode_rsa_pk8der.c
+     1>SSL\x509\encode_rsa_pk8der.c(98): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         encode_rsa_rawder.c
+     1>SSL\x509\encode_rsa_rawder.c(97): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         skey_decoder.c
+     1>SSL\x509\skey_decoder.c(651): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         x509_decoder.c
+     1>SSL\x509\x509_decoder.c(774): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         x509_knownkey.c
+     1>SSL\x509\x509_knownkey.c(106): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         x509_minimal.c
+     1>SSL\x509\x509_minimal.c(1724): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         x509_minimal_full.c
+     1>SSL\x509\x509_minimal_full.c(60): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         XboxTLS.cpp
+     1>XboxTLS.cpp(497): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "StdAfx.h"' to your source?
+         Generating Code...
+     1>Done Building Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\XboxTLS2.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:08.05

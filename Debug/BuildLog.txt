@@ -1,0 +1,353 @@
+﻿Build started 25/04/2026 9:59:53 AM.
+     1>Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\XboxTLS2.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\XboxTLS.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Xbox 360 SDK\bin\win32\CL.exe /c /IC:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\SSL /Zi /nologo /W3 /WX- /Od /D _DEBUG /D _XBOX /GF- /Gm /MTd /GS- /Gy- /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /GR- /openmp- /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP Debug.cpp dns.cpp downloadFile.cpp main.cpp parsing.cpp /callcap /FI"C:\Program Files (x86)\Microsoft Xbox 360 SDK\\include\xbox\xbox_intellisense_platform.h"
+         parsing.cpp
+         main.cpp
+         downloadFile.cpp
+     1>downloadFile.cpp(336): warning C4244: '=' : conversion from 'unsigned __int64' to 'int', possible loss of data
+     1>downloadFile.cpp(341): warning C4244: 'argument' : conversion from 'unsigned __int64' to 'int', possible loss of data
+     1>downloadFile.cpp(361): warning C4244: '=' : conversion from 'unsigned __int64' to 'int', possible loss of data
+     1>downloadFile.cpp(477): warning C4018: '<' : signed/unsigned mismatch
+         dns.cpp
+         Debug.cpp
+         Generating Code...
+         C:\Program Files (x86)\Microsoft Xbox 360 SDK\bin\win32\CL.exe /c /IC:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\SSL /Zi /nologo /W3 /WX- /Od /D _DEBUG /D _XBOX /GF- /Gm /MTd /GS- /Gy- /fp:fast /fp:except- /Zc:wchar_t /Zc:forScope /GR- /openmp- /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TC SSL\aead\ccm.c SSL\aead\eax.c SSL\aead\gcm.c SSL\codec\ccopy.c SSL\codec\dec16be.c SSL\codec\dec16le.c SSL\codec\dec32be.c SSL\codec\dec32le.c SSL\codec\dec64be.c SSL\codec\dec64le.c SSL\codec\enc16be.c SSL\codec\enc16le.c SSL\codec\enc32be.c SSL\codec\enc32le.c SSL\codec\enc64be.c SSL\codec\enc64le.c SSL\codec\pemdec.c SSL\codec\pemenc.c SSL\ec\ecdsa_atr.c SSL\ec\ecdsa_default_sign_asn1.c SSL\ec\ecdsa_default_sign_raw.c SSL\ec\ecdsa_default_vrfy_asn1.c SSL\ec\ecdsa_default_vrfy_raw.c SSL\ec\ecdsa_i15_bits.c SSL\ec\ecdsa_i15_sign_asn1.c SSL\ec\ecdsa_i15_sign_raw.c SSL\ec\ecdsa_i15_vrfy_asn1.c SSL\ec\ecdsa_i15_vrfy_raw.c SSL\ec\ecdsa_i31_bits.c SSL\ec\ecdsa_i31_sign_asn1.c SSL\ec\ecdsa_i31_sign_raw.c SSL\ec\ecdsa_i31_vrfy_asn1.c SSL\ec\ecdsa_i31_vrfy_raw.c SSL\ec\ecdsa_rta.c SSL\ec\ec_all_m15.c SSL\ec\ec_all_m31.c SSL\ec\ec_c25519_i15.c SSL\ec\ec_c25519_i31.c SSL\ec\ec_c25519_m15.c SSL\ec\ec_c25519_m31.c SSL\ec\ec_c25519_m62.c SSL\ec\ec_c25519_m64.c SSL\ec\ec_curve25519.c SSL\ec\ec_default.c SSL\ec\ec_keygen.c SSL\ec\ec_p256_m15.c SSL\ec\ec_p256_m31.c SSL\ec\ec_p256_m62.c SSL\ec\ec_p256_m64.c SSL\ec\ec_prime_i15.c SSL\ec\ec_prime_i31.c SSL\ec\ec_pubkey.c SSL\ec\ec_secp256r1.c SSL\ec\ec_secp384r1.c SSL\ec\ec_secp521r1.c SSL\hash\dig_oid.c SSL\hash\dig_size.c SSL\hash\ghash_ctmul.c SSL\hash\ghash_ctmul32.c SSL\hash\ghash_ctmul64.c SSL\hash\ghash_pclmul.c SSL\hash\ghash_pwr8.c SSL\hash\md5.c SSL\hash\md5sha1.c SSL\hash\mgf1.c SSL\hash\multihash.c SSL\hash\sha1.c SSL\hash\sha2big.c SSL\hash\sha2small.c SSL\int\i15_add.c SSL\int\i15_bitlen.c SSL\int\i15_decmod.c SSL\int\i15_decode.c SSL\int\i15_decred.c SSL\int\i15_encode.c SSL\int\i15_fmont.c SSL\int\i15_iszero.c SSL\int\i15_moddiv.c SSL\int\i15_modpow.c SSL\int\i15_modpow2.c SSL\int\i15_montmul.c SSL\int\i15_mulacc.c SSL\int\i15_muladd.c SSL\int\i15_ninv15.c SSL\int\i15_reduce.c SSL\int\i15_rshift.c SSL\int\i15_sub.c SSL\int\i15_tmont.c SSL\int\i31_add.c SSL\int\i31_bitlen.c SSL\int\i31_decmod.c SSL\int\i31_decode.c SSL\int\i31_decred.c SSL\int\i31_encode.c SSL\int\i31_fmont.c SSL\int\i31_iszero.c SSL\int\i31_moddiv.c SSL\int\i31_modpow.c SSL\int\i31_modpow2.c SSL\int\i31_montmul.c SSL\int\i31_mulacc.c SSL\int\i31_muladd.c SSL\int\i31_ninv31.c SSL\int\i31_reduce.c SSL\int\i31_rshift.c SSL\int\i31_sub.c SSL\int\i31_tmont.c SSL\int\i32_add.c SSL\int\i32_bitlen.c SSL\int\i32_decmod.c SSL\int\i32_decode.c SSL\int\i32_decred.c SSL\int\i32_div32.c SSL\int\i32_encode.c SSL\int\i32_fmont.c SSL\int\i32_iszero.c SSL\int\i32_modpow.c SSL\int\i32_montmul.c SSL\int\i32_mulacc.c SSL\int\i32_muladd.c SSL\int\i32_ninv32.c SSL\int\i32_reduce.c SSL\int\i32_sub.c SSL\int\i32_tmont.c SSL\int\i62_modpow2.c SSL\mac\hmac.c SSL\mac\hmac_ct.c SSL\rand\aesctr_drbg.c SSL\rand\hmac_drbg.c SSL\rand\sysrng.c SSL\rsa\rsa_default_keygen.c SSL\rsa\rsa_default_modulus.c SSL\rsa\rsa_default_oaep_decrypt.c SSL\rsa\rsa_default_oaep_encrypt.c SSL\rsa\rsa_default_pkcs1_sign.c SSL\rsa\rsa_default_pkcs1_vrfy.c SSL\rsa\rsa_default_priv.c SSL\rsa\rsa_default_privexp.c SSL\rsa\rsa_default_pss_sign.c SSL\rsa\rsa_default_pss_vrfy.c SSL\rsa\rsa_default_pub.c SSL\rsa\rsa_default_pubexp.c SSL\rsa\rsa_i15_keygen.c SSL\rsa\rsa_i15_modulus.c SSL\rsa\rsa_i15_oaep_decrypt.c SSL\rsa\rsa_i15_oaep_encrypt.c SSL\rsa\rsa_i15_pkcs1_sign.c SSL\rsa\rsa_i15_pkcs1_vrfy.c SSL\rsa\rsa_i15_priv.c SSL\rsa\rsa_i15_privexp.c SSL\rsa\rsa_i15_pss_sign.c SSL\rsa\rsa_i15_pss_vrfy.c SSL\rsa\rsa_i15_pub.c SSL\rsa\rsa_i15_pubexp.c SSL\rsa\rsa_i31_keygen.c SSL\rsa\rsa_i31_keygen_inner.c SSL\rsa\rsa_i31_modulus.c SSL\rsa\rsa_i31_oaep_decrypt.c SSL\rsa\rsa_i31_oaep_encrypt.c SSL\rsa\rsa_i31_pkcs1_sign.c SSL\rsa\rsa_i31_pkcs1_vrfy.c SSL\rsa\rsa_i31_priv.c SSL\rsa\rsa_i31_privexp.c SSL\rsa\rsa_i31_pss_sign.c SSL\rsa\rsa_i31_pss_vrfy.c SSL\rsa\rsa_i31_pub.c SSL\rsa\rsa_i31_pubexp.c SSL\rsa\rsa_i32_oaep_decrypt.c SSL\rsa\rsa_i32_oaep_encrypt.c SSL\rsa\rsa_i32_pkcs1_sign.c SSL\rsa\rsa_i32_pkcs1_vrfy.c SSL\rsa\rsa_i32_priv.c SSL\rsa\rsa_i32_pss_sign.c SSL\rsa\rsa_i32_pss_vrfy.c SSL\rsa\rsa_i32_pub.c SSL\rsa\rsa_i62_keygen.c SSL\rsa\rsa_i62_oaep_decrypt.c SSL\rsa\rsa_i62_oaep_encrypt.c SSL\rsa\rsa_i62_pkcs1_sign.c SSL\rsa\rsa_i62_pkcs1_vrfy.c SSL\rsa\rsa_i62_priv.c SSL\rsa\rsa_i62_pss_sign.c SSL\rsa\rsa_i62_pss_vrfy.c SSL\rsa\rsa_i62_pub.c SSL\rsa\rsa_oaep_pad.c SSL\rsa\rsa_oaep_unpad.c SSL\rsa\rsa_pkcs1_sig_pad.c SSL\rsa\rsa_pkcs1_sig_unpad.c SSL\rsa\rsa_pss_sig_pad.c SSL\rsa\rsa_pss_sig_unpad.c SSL\rsa\rsa_ssl_decrypt.c SSL\settings.c SSL\ssl\prf.c SSL\ssl\prf_md5sha1.c SSL\ssl\prf_sha256.c SSL\ssl\prf_sha384.c SSL\ssl\ssl_ccert_single_ec.c SSL\ssl\ssl_ccert_single_rsa.c SSL\ssl\ssl_client.c SSL\ssl\ssl_client_default_rsapub.c SSL\ssl\ssl_client_full.c SSL\ssl\ssl_engine.c SSL\ssl\ssl_engine_default_aescbc.c SSL\ssl\ssl_engine_default_aesccm.c SSL\ssl\ssl_engine_default_aesgcm.c SSL\ssl\ssl_engine_default_chapol.c SSL\ssl\ssl_engine_default_descbc.c SSL\ssl\ssl_engine_default_ec.c SSL\ssl\ssl_engine_default_ecdsa.c SSL\ssl\ssl_engine_default_rsavrfy.c SSL\ssl\ssl_hashes.c SSL\ssl\ssl_hs_client.c SSL\ssl\ssl_hs_server.c SSL\ssl\ssl_io.c SSL\ssl\ssl_keyexport.c SSL\ssl\ssl_lru.c SSL\ssl\ssl_rec_cbc.c SSL\ssl\ssl_rec_ccm.c SSL\ssl\ssl_rec_chapol.c SSL\ssl\ssl_rec_gcm.c SSL\ssl\ssl_scert_single_ec.c SSL\ssl\ssl_scert_single_rsa.c SSL\ssl\ssl_server.c SSL\ssl\ssl_server_full_ec.c SSL\ssl\ssl_server_full_rsa.c SSL\ssl\ssl_server_mine2c.c SSL\ssl\ssl_server_mine2g.c SSL\ssl\ssl_server_minf2c.c SSL\ssl\ssl_server_minf2g.c SSL\ssl\ssl_server_minr2g.c SSL\ssl\ssl_server_minu2g.c SSL\ssl\ssl_server_minv2g.c SSL\symcipher\aes_big_cbcdec.c SSL\symcipher\aes_big_cbcenc.c SSL\symcipher\aes_big_ctr.c SSL\symcipher\aes_big_ctrcbc.c SSL\symcipher\aes_big_dec.c SSL\symcipher\aes_big_enc.c SSL\symcipher\aes_common.c SSL\symcipher\aes_ct.c SSL\symcipher\aes_ct64.c SSL\symcipher\aes_ct64_cbcdec.c SSL\symcipher\aes_ct64_cbcenc.c SSL\symcipher\aes_ct64_ctr.c SSL\symcipher\aes_ct64_ctrcbc.c SSL\symcipher\aes_ct64_dec.c SSL\symcipher\aes_ct64_enc.c SSL\symcipher\aes_ct_cbcdec.c SSL\symcipher\aes_ct_cbcenc.c SSL\symcipher\aes_ct_ctr.c SSL\symcipher\aes_ct_ctrcbc.c SSL\symcipher\aes_ct_dec.c SSL\symcipher\aes_ct_enc.c SSL\symcipher\aes_pwr8.c SSL\symcipher\aes_pwr8_cbcdec.c SSL\symcipher\aes_pwr8_cbcenc.c SSL\symcipher\aes_pwr8_ctr.c SSL\symcipher\aes_pwr8_ctrcbc.c SSL\symcipher\aes_small_cbcdec.c SSL\symcipher\aes_small_cbcenc.c SSL\symcipher\aes_small_ctr.c SSL\symcipher\aes_small_ctrcbc.c SSL\symcipher\aes_small_dec.c SSL\symcipher\aes_small_enc.c SSL\symcipher\aes_x86ni.c SSL\symcipher\aes_x86ni_cbcdec.c SSL\symcipher\aes_x86ni_cbcenc.c SSL\symcipher\aes_x86ni_ctr.c SSL\symcipher\aes_x86ni_ctrcbc.c SSL\symcipher\chacha20_ct.c SSL\symcipher\chacha20_sse2.c SSL\symcipher\des_ct.c SSL\symcipher\des_ct_cbcdec.c SSL\symcipher\des_ct_cbcenc.c SSL\symcipher\des_support.c SSL\symcipher\des_tab.c SSL\symcipher\des_tab_cbcdec.c SSL\symcipher\des_tab_cbcenc.c SSL\symcipher\poly1305_ctmul.c SSL\symcipher\poly1305_ctmul32.c SSL\symcipher\poly1305_ctmulq.c SSL\symcipher\poly1305_i15.c SSL\x509\asn1enc.c SSL\x509\encode_ec_pk8der.c SSL\x509\encode_ec_rawder.c SSL\x509\encode_rsa_pk8der.c SSL\x509\encode_rsa_rawder.c SSL\x509\skey_decoder.c SSL\x509\x509_decoder.c SSL\x509\x509_knownkey.c SSL\x509\x509_minimal.c SSL\x509\x509_minimal_full.c /callcap /FI"C:\Program Files (x86)\Microsoft Xbox 360 SDK\\include\xbox\xbox_intellisense_platform.h"
+         x509_minimal_full.c
+         x509_minimal.c
+         x509_knownkey.c
+         x509_decoder.c
+         skey_decoder.c
+         encode_rsa_rawder.c
+         encode_rsa_pk8der.c
+         encode_ec_rawder.c
+         encode_ec_pk8der.c
+         asn1enc.c
+         poly1305_i15.c
+         poly1305_ctmulq.c
+         poly1305_ctmul32.c
+         poly1305_ctmul.c
+         des_tab_cbcenc.c
+         des_tab_cbcdec.c
+         des_tab.c
+         des_support.c
+         des_ct_cbcenc.c
+         des_ct_cbcdec.c
+         Generating Code...
+         Compiling...
+         des_ct.c
+         chacha20_sse2.c
+         chacha20_ct.c
+         aes_x86ni_ctrcbc.c
+         aes_x86ni_ctr.c
+         aes_x86ni_cbcenc.c
+         aes_x86ni_cbcdec.c
+         aes_x86ni.c
+         aes_small_enc.c
+         aes_small_dec.c
+         aes_small_ctrcbc.c
+         aes_small_ctr.c
+         aes_small_cbcenc.c
+         aes_small_cbcdec.c
+         aes_pwr8_ctrcbc.c
+         aes_pwr8_ctr.c
+         aes_pwr8_cbcenc.c
+         aes_pwr8_cbcdec.c
+         aes_pwr8.c
+         aes_ct_enc.c
+         Generating Code...
+         Compiling...
+         aes_ct_dec.c
+         aes_ct_ctrcbc.c
+         aes_ct_ctr.c
+         aes_ct_cbcenc.c
+         aes_ct_cbcdec.c
+         aes_ct64_enc.c
+         aes_ct64_dec.c
+         aes_ct64_ctrcbc.c
+         aes_ct64_ctr.c
+         aes_ct64_cbcenc.c
+         aes_ct64_cbcdec.c
+         aes_ct64.c
+         aes_ct.c
+         aes_common.c
+         aes_big_enc.c
+         aes_big_dec.c
+         aes_big_ctrcbc.c
+         aes_big_ctr.c
+         aes_big_cbcenc.c
+         aes_big_cbcdec.c
+         Generating Code...
+         Compiling...
+         ssl_server_minv2g.c
+         ssl_server_minu2g.c
+         ssl_server_minr2g.c
+         ssl_server_minf2g.c
+         ssl_server_minf2c.c
+         ssl_server_mine2g.c
+         ssl_server_mine2c.c
+         ssl_server_full_rsa.c
+         ssl_server_full_ec.c
+         ssl_server.c
+         ssl_scert_single_rsa.c
+         ssl_scert_single_ec.c
+         ssl_rec_gcm.c
+         ssl_rec_chapol.c
+         ssl_rec_ccm.c
+         ssl_rec_cbc.c
+         ssl_lru.c
+         ssl_keyexport.c
+         ssl_io.c
+         ssl_hs_server.c
+         Generating Code...
+         Compiling...
+         ssl_hs_client.c
+         ssl_hashes.c
+         ssl_engine_default_rsavrfy.c
+         ssl_engine_default_ecdsa.c
+         ssl_engine_default_ec.c
+         ssl_engine_default_descbc.c
+         ssl_engine_default_chapol.c
+         ssl_engine_default_aesgcm.c
+         ssl_engine_default_aesccm.c
+         ssl_engine_default_aescbc.c
+         ssl_engine.c
+         ssl_client_full.c
+         ssl_client_default_rsapub.c
+         ssl_client.c
+         ssl_ccert_single_rsa.c
+         ssl_ccert_single_ec.c
+         prf_sha384.c
+         prf_sha256.c
+         prf_md5sha1.c
+         prf.c
+         Generating Code...
+         Compiling...
+         settings.c
+         rsa_ssl_decrypt.c
+         rsa_pss_sig_unpad.c
+         rsa_pss_sig_pad.c
+         rsa_pkcs1_sig_unpad.c
+         rsa_pkcs1_sig_pad.c
+         rsa_oaep_unpad.c
+         rsa_oaep_pad.c
+         rsa_i62_pub.c
+         rsa_i62_pss_vrfy.c
+         rsa_i62_pss_sign.c
+         rsa_i62_priv.c
+         rsa_i62_pkcs1_vrfy.c
+         rsa_i62_pkcs1_sign.c
+         rsa_i62_oaep_encrypt.c
+         rsa_i62_oaep_decrypt.c
+         rsa_i62_keygen.c
+         rsa_i32_pub.c
+         rsa_i32_pss_vrfy.c
+         rsa_i32_pss_sign.c
+         Generating Code...
+         Compiling...
+         rsa_i32_priv.c
+         rsa_i32_pkcs1_vrfy.c
+         rsa_i32_pkcs1_sign.c
+         rsa_i32_oaep_encrypt.c
+         rsa_i32_oaep_decrypt.c
+         rsa_i31_pubexp.c
+         rsa_i31_pub.c
+         rsa_i31_pss_vrfy.c
+         rsa_i31_pss_sign.c
+         rsa_i31_privexp.c
+         rsa_i31_priv.c
+         rsa_i31_pkcs1_vrfy.c
+         rsa_i31_pkcs1_sign.c
+         rsa_i31_oaep_encrypt.c
+         rsa_i31_oaep_decrypt.c
+         rsa_i31_modulus.c
+         rsa_i31_keygen_inner.c
+         rsa_i31_keygen.c
+         rsa_i15_pubexp.c
+         rsa_i15_pub.c
+         Generating Code...
+         Compiling...
+         rsa_i15_pss_vrfy.c
+         rsa_i15_pss_sign.c
+         rsa_i15_privexp.c
+         rsa_i15_priv.c
+         rsa_i15_pkcs1_vrfy.c
+         rsa_i15_pkcs1_sign.c
+         rsa_i15_oaep_encrypt.c
+         rsa_i15_oaep_decrypt.c
+         rsa_i15_modulus.c
+         rsa_i15_keygen.c
+         rsa_default_pubexp.c
+         rsa_default_pub.c
+         rsa_default_pss_vrfy.c
+         rsa_default_pss_sign.c
+         rsa_default_privexp.c
+         rsa_default_priv.c
+         rsa_default_pkcs1_vrfy.c
+         rsa_default_pkcs1_sign.c
+         rsa_default_oaep_encrypt.c
+         rsa_default_oaep_decrypt.c
+         Generating Code...
+         Compiling...
+         rsa_default_modulus.c
+         rsa_default_keygen.c
+         sysrng.c
+         hmac_drbg.c
+         aesctr_drbg.c
+         hmac_ct.c
+         hmac.c
+         i62_modpow2.c
+         i32_tmont.c
+         i32_sub.c
+         i32_reduce.c
+         i32_ninv32.c
+         i32_muladd.c
+         i32_mulacc.c
+         i32_montmul.c
+     1>SSL\int\i32_montmul.c(68): warning C4244: 'function' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+         i32_modpow.c
+         i32_iszero.c
+         i32_fmont.c
+         i32_encode.c
+         i32_div32.c
+         Generating Code...
+         Compiling...
+         i32_decred.c
+         i32_decode.c
+         i32_decmod.c
+         i32_bitlen.c
+         i32_add.c
+         i31_tmont.c
+         i31_sub.c
+         i31_rshift.c
+         i31_reduce.c
+         i31_ninv31.c
+         i31_muladd.c
+         i31_mulacc.c
+     1>SSL\int\i31_mulacc.c(69): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+         i31_montmul.c
+     1>SSL\int\i31_montmul.c(81): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+     1>SSL\int\i31_montmul.c(85): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+     1>SSL\int\i31_montmul.c(89): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+     1>SSL\int\i31_montmul.c(93): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+     1>SSL\int\i31_montmul.c(101): warning C4244: '=' : conversion from 'uint64_t' to 'uint32_t', possible loss of data
+         i31_modpow2.c
+         i31_modpow.c
+         i31_moddiv.c
+         i31_iszero.c
+         i31_fmont.c
+         i31_encode.c
+         i31_decred.c
+         Generating Code...
+         Compiling...
+         i31_decode.c
+         i31_decmod.c
+         i31_bitlen.c
+         i31_add.c
+         i15_tmont.c
+         i15_sub.c
+         i15_rshift.c
+         i15_reduce.c
+         i15_ninv15.c
+         i15_muladd.c
+         i15_mulacc.c
+         i15_montmul.c
+         i15_modpow2.c
+         i15_modpow.c
+         i15_moddiv.c
+         i15_iszero.c
+         i15_fmont.c
+         i15_encode.c
+         i15_decred.c
+         i15_decode.c
+         Generating Code...
+         Compiling...
+         i15_decmod.c
+         i15_bitlen.c
+         i15_add.c
+         sha2small.c
+         sha2big.c
+         sha1.c
+         multihash.c
+         mgf1.c
+         md5sha1.c
+         md5.c
+         ghash_pwr8.c
+         ghash_pclmul.c
+         ghash_ctmul64.c
+         ghash_ctmul32.c
+         ghash_ctmul.c
+         dig_size.c
+         dig_oid.c
+         ec_secp521r1.c
+         ec_secp384r1.c
+         ec_secp256r1.c
+         Generating Code...
+         Compiling...
+         ec_pubkey.c
+         ec_prime_i31.c
+         ec_prime_i15.c
+         ec_p256_m64.c
+         ec_p256_m62.c
+         ec_p256_m31.c
+         ec_p256_m15.c
+         ec_keygen.c
+         ec_default.c
+         ec_curve25519.c
+         ec_c25519_m64.c
+         ec_c25519_m62.c
+         ec_c25519_m31.c
+         ec_c25519_m15.c
+         ec_c25519_i31.c
+         ec_c25519_i15.c
+         ec_all_m31.c
+         ec_all_m15.c
+         ecdsa_rta.c
+         ecdsa_i31_vrfy_raw.c
+         Generating Code...
+         Compiling...
+         ecdsa_i31_vrfy_asn1.c
+         ecdsa_i31_sign_raw.c
+         ecdsa_i31_sign_asn1.c
+         ecdsa_i31_bits.c
+         ecdsa_i15_vrfy_raw.c
+         ecdsa_i15_vrfy_asn1.c
+         ecdsa_i15_sign_raw.c
+         ecdsa_i15_sign_asn1.c
+         ecdsa_i15_bits.c
+         ecdsa_default_vrfy_raw.c
+         ecdsa_default_vrfy_asn1.c
+         ecdsa_default_sign_raw.c
+         ecdsa_default_sign_asn1.c
+         ecdsa_atr.c
+         pemenc.c
+         pemdec.c
+         enc64le.c
+         enc64be.c
+         enc32le.c
+         enc32be.c
+         Generating Code...
+         Compiling...
+         enc16le.c
+         enc16be.c
+         dec64le.c
+         dec64be.c
+         dec32le.c
+         dec32be.c
+         dec16le.c
+         dec16be.c
+         ccopy.c
+         gcm.c
+         eax.c
+         ccm.c
+         Generating Code...
+     1>Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\XboxTLS2.vcxproj" (1) is building "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\Common\AtgFramework2010.vcxproj" (2:3) on node 2 (GetResolvedLinkLibs target(s)).
+     2>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(283,5): error MSB8013: This project doesn't contain the Configuration and Platform combination of Debug|Win32.
+     2>Done Building Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\Common\AtgFramework2010.vcxproj" (GetResolvedLinkLibs target(s)) -- FAILED.
+     1>Done Building Project "C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\XboxTLS2.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:53.08

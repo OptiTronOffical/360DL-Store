@@ -1,0 +1,91 @@
+<XuiCanvas version="000c">
+  <Properties>
+    <Width>1280.000000</Width>
+    <Height>720.000000</Height>
+  </Properties>
+
+  <XuiScene>
+    <Properties>
+      <Id>MainScene</Id>
+      <ClassOverride>SearchScene</ClassOverride>
+      <Width>1000.000000</Width>
+      <Height>560.000000</Height>
+      <Position>140.000000,80.000000,0.000000</Position>
+      <DefaultFocus>SearchButton</DefaultFocus>
+    </Properties>
+
+    <XuiText>
+      <Properties>
+        <Id>TitleText</Id>
+        <Text>Xbox 360 Search UI</Text>
+        <Width>900.000000</Width>
+        <Height>44.000000</Height>
+        <Position>30.000000,20.000000,0.000000</Position>
+        <TextColor>0xffffffff</TextColor>
+        <TextStyle>1040</TextStyle>
+      </Properties>
+    </XuiText>
+
+    <XuiEdit>
+      <Properties>
+        <Id>SearchEdit</Id>
+        <Visual>XuiEdit</Visual>
+        <Text></Text>
+        <Width>690.000000</Width>
+        <Height>42.000000</Height>
+        <Position>30.000000,86.000000,0.000000</Position>
+        <NavRight>SearchButton</NavRight>
+        <NavDown>ResultsList</NavDown>
+      </Properties>
+    </XuiEdit>
+
+    <XuiButton>
+      <Properties>
+        <Id>SearchButton</Id>
+        <Visual>XuiButton</Visual>
+        <Text>Search</Text>
+        <Width>180.000000</Width>
+        <Height>42.000000</Height>
+        <Position>740.000000,86.000000,0.000000</Position>
+        <NavLeft>SearchEdit</NavLeft>
+        <NavDown>ResultsList</NavDown>
+      </Properties>
+    </XuiButton>
+
+    <XuiText>
+      <Properties>
+        <Id>ResultsTitle</Id>
+        <Text>Results</Text>
+        <Width>500.000000</Width>
+        <Height>34.000000</Height>
+        <Position>30.000000,150.000000,0.000000</Position>
+        <TextColor>0xffffffff</TextColor>
+      </Properties>
+    </XuiText>
+
+    <XuiList>
+      <Properties>
+        <Id>ResultsList</Id>
+        <ClassOverride>SearchResultsList</ClassOverride>
+        <Visual>XuiList</Visual>
+        <Width>890.000000</Width>
+        <Height>275.000000</Height>
+        <Position>30.000000,190.000000,0.000000</Position>
+        <NavUp>SearchButton</NavUp>
+        <NavDown>SearchButton</NavDown>
+      </Properties>
+    </XuiList>
+
+    <XuiText>
+      <Properties>
+        <Id>StatusText</Id>
+        <Text>Press Search to type a query.</Text>
+        <Width>890.000000</Width>
+        <Height>70.000000</Height>
+        <Position>30.000000,485.000000,0.000000</Position>
+        <TextColor>0xffdddddd</TextColor>
+      </Properties>
+    </XuiText>
+
+  </XuiScene>
+</XuiCanvas>
