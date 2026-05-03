@@ -59,7 +59,7 @@ Many thanks to all of the open source projects that made this possible, includin
 ## TODO
 
 * Clean up the very messy code
-* Optimise 7z decompression
+* Optimise 7z decompression, potentially implimenting multithreading
 * Eliminate memory leaks
 * Impliment a better UI using xUI
 * Add support to download from ROMSFUN using flaresolver proxy
