@@ -4,7 +4,7 @@
 #include "Automation.h"
 #include <stdio.h>
 
-#define TEXTBUFFER_SIZE 512
+#define TEXTBUFFER_SIZE (1024 * 10) // 2KB buffer
 
 ATG::Console g_console;// console for output
 #ifdef USE_UNICODE

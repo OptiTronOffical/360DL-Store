@@ -42,8 +42,12 @@
 #include "LzmaDec.h"
 #include "Lzma2Dec.h"
 
-#define kInputBufSize ((size_t)1 << 23)
-#define kOutputBufSize ((size_t)1 << 21)
+// Input buffer should be large than output buffer (for some reason????)
+#define kInputBufSize ((size_t)1024 * (size_t)1024 * (size_t)14) // 10 MB
+#define kOutputBufSize ((size_t)1024 * (size_t)1024 * 8)
+
+// #define kInputBufSize ((size_t)1 << 23)
+// #define kOutputBufSize ((size_t)1 << 21)
 
 // #define kInputBufSize ((size_t)1 << 21)
 // #define kOutputBufSize ((size_t)1 << 19)
@@ -139,7 +143,7 @@ static void progress_render(CProgressInfo *progress, int force)
 
     now = clock();
     if (!force) {
-        const clock_t min_interval = CLOCKS_PER_SEC * 2;
+        const clock_t min_interval = CLOCKS_PER_SEC * 3;
         if (progress->completed_bytes < progress->next_update_at &&
                 now - progress->last_render < min_interval) {
             return;
@@ -171,18 +175,25 @@ static void progress_render(CProgressInfo *progress, int force)
     int timeMinutes = (timeRemaining % (60*60)) / 60; //minutes
     int timeSec = (timeRemaining % (60*60)) % 60; //seconds
 
-    fprintf(stderr,
-            "\r[%.*s%*s] %5.1f%%  %s / %s%s    Time Remaining: %dh, %dm, %ds\n",
-            (int)filled, "##############################",
-            (int)(kProgressBarWidth - filled), "",
-            percent, done_buf, total_buf, file_buf, timeHours, timeMinutes, timeSec);
-    // fflush(stderr);
+    if(elapsedTime == 0) {
+        elapsedTime++;
+    }
+
+    // Extract speed in KiB/sec
+    unsigned long extractSpeed = (progress->completed_bytes / (1024) ) / elapsedTime;
+
+    // fprintf(stderr,
+    //         "\r[%.*s%*s] %5.1f%%  %s / %s%s    Time Remaining: %dh, %dm, %ds\n",
+    //         (int)filled, "##############################",
+    //         (int)(kProgressBarWidth - filled), "",
+    //         percent, done_buf, total_buf, file_buf, timeHours, timeMinutes, timeSec);
+    // // fflush(stderr);
 
     //print to display
-    dprintf("\r[%.*s%*s] %5.1f%%  %s / %s%s    Time Remaining: %dh, %dm, %ds\n",
+    dprintf("\r[%.*s%*s] %5.1f%%  %s / %s, %lu KiB/sec, Time Remaining: %dh, %dm, %ds\n",
             (int)filled, "##############################",
             (int)(kProgressBarWidth - filled), "",
-            percent, done_buf, total_buf, file_buf, timeHours, timeMinutes, timeSec);
+            percent, done_buf, total_buf, extractSpeed, timeHours, timeMinutes, timeSec);
 
     progress->last_render = now;
     progress->next_update_at = progress->completed_bytes + progress->update_step;

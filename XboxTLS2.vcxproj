@@ -96,6 +96,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <RemoteRoot>Usb1:\Development</RemoteRoot>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_LTCG|Xbox 360'">
     <LinkIncremental>false</LinkIncremental>
@@ -229,6 +230,11 @@
     <ImageXex>
       <AdditionalSections>font=$(OutDir)Media\Fonts\font.xpr</AdditionalSections>
     </ImageXex>
+    <Deploy>
+      <DeploymentType>CopyToHardDrive</DeploymentType>
+      <Progress>true</Progress>
+      <ForceCopy>true</ForceCopy>
+    </Deploy>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_LTCG|Xbox 360'">
     <ClCompile>

@@ -1,5 +1,6 @@
 #include <xtl.h>
 
+#include <stdio.h>
 #include <ctype.h>
 #include <iostream>
 #include <string>
@@ -8,6 +9,8 @@
 #include <downloadFile.h>
 
 #include "vimms_lair.h"
+
+#define TEXTBUFFER_SIZE (1024 * 10)
 
 static std::string UrlEncodeQuery(const std::string &value)
 {
@@ -39,15 +42,16 @@ static std::string UrlEncodeQuery(const std::string &value)
 
 static void RenderSearchResults(const GameList *list, int selected, int scroll)
 {
-    const int visibleRows = 10;
+    const int visibleRows = 20;
+    char outputTextBuffer[TEXTBUFFER_SIZE] = " ";
 
     ClearConsole();
-    dprintf("Vimm's Lair search results\n\n");
+    _snprintf(outputTextBuffer, TEXTBUFFER_SIZE - strlen(outputTextBuffer), "Vimm's Lair search results\n\n");
 
     if (!list || list->count == 0)
     {
-        dprintf("No games found.\n\n");
-        dprintf("B: Back\n");
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "No games found.\n\n");
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "B: Back\n");
         return;
     }
 
@@ -57,13 +61,15 @@ static void RenderSearchResults(const GameList *list, int selected, int scroll)
         if (index >= (int)list->count)
             break;
 
-        dprintf("%c %2d. %s\n",
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "%c %2d. %s\n",
                 index == selected ? '>' : ' ',
                 index + 1,
                 list->items[index].name);
     }
 
-    dprintf("\nA: Select   B: Back   D-Pad: Move\n");
+    _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "\nA: Select   B: Back   D-Pad: Move\n");
+
+    dprintf("%s", outputTextBuffer); // draw in one go to prevent flickering
 }
 
 static int ShowSearchResultsUI(const GameList *list)
@@ -87,7 +93,7 @@ static int ShowSearchResultsUI(const GameList *list)
         }
     }
 
-    const int visibleRows = 10;
+    const int visibleRows = 20;
     int selected = 0;
     int scroll = 0;
     WORD previousButtons = 0;
@@ -142,19 +148,21 @@ static int ShowSearchResultsUI(const GameList *list)
 
 static void RenderMediaResults(const MediaList *list, const char *gameName, int selected)
 {
+    char outputTextBuffer[TEXTBUFFER_SIZE] = " ";
+
     ClearConsole();
-    dprintf("Choose download media\n\n");
+    _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "Choose download media\n\n");
 
     if (!list || list->count == 0)
     {
-        dprintf("No media IDs found.\n\n");
-        dprintf("B: Back\n");
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "No media IDs found.\n\n");
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "B: Back\n");
         return;
     }
 
     for (int i = 0; i < (int)list->count; ++i)
     {
-        dprintf("%c %2d. %s Disc %s version %s\n",
+        _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "%c %2d. %s Disc %s version %s\n",
                 i == selected ? '>' : ' ',
                 i + 1,
                 gameName ? gameName : "Selected game",
@@ -162,7 +170,9 @@ static void RenderMediaResults(const MediaList *list, const char *gameName, int 
                 list->items[i].version);
     }
 
-    dprintf("\nA: Select   B: Back   D-Pad: Move\n");
+    _snprintf(outputTextBuffer + strlen(outputTextBuffer), TEXTBUFFER_SIZE - strlen(outputTextBuffer), "\nA: Select   B: Back   D-Pad: Move\n");
+
+    dprintf("%s", outputTextBuffer);
 }
 
 static int ShowMediaResultsUI(const MediaList *list, const char *gameName)
@@ -349,6 +359,8 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
     }
 
     GameList list = {0};
+
+    printf("Parsing search results\n");
 
     if (!parse_vimm_search_results(buffer, &list)) // this strlen operation assumes that there were no NULL character before the end, which is fine for HTML, but not for other files
     {
