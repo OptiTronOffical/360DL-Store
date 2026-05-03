@@ -64,3 +64,4 @@ Many thanks to all of the open source projects that made this possible, includin
 * Impliment a better UI using xUI
 * Add support to download from ROMSFUN using flaresolver proxy
 * Potentially make use of the [triangle](https://github.com/JakobRangel/Triangle) frontend when it is made open source
+Pull Requests are welcome
