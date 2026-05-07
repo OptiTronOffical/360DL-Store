@@ -109,6 +109,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_DEBUG;_XBOX;_LIB</PreprocessorDefinitions>
       <CallAttributedProfiling>Callcap</CallAttributedProfiling>
+      <AdditionalIncludeDirectories>../</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -226,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extract-xiso.c" />
+    <ClCompile Include="FAT32.cpp" />
     <ClCompile Include="file-stuff.c" />
     <ClCompile Include="win32\asprintf.c" />
     <ClCompile Include="win32\dirent.c" />
@@ -233,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="extract-xiso.h" />
+    <ClInclude Include="FAT32.h" />
     <ClInclude Include="file-stuff.h" />
     <ClInclude Include="win32\asprintf.h" />
     <ClInclude Include="win32\dirent.h" />

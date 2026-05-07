@@ -7,9 +7,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <iostream>
+#include <stdio.h>
+#include <fcntl.h>
 
 #include "downloadFile.h"
 #include "decompress7z.h"
+
+#include <settings.h>
 #include <extract-xiso.h>
 #include <ui.h>
 
@@ -31,7 +35,7 @@ bool CheckGameMounted()
 	if (fopen_s(&fd, "game:\\test.tmp", "w") != 0)
 	{
 		dprintf("GAME_NOT_MOUNTED_TRYING_USB\n");
-		fclose(fd);
+		// fclose(fd);
 		if (mount("game:", "\\Device\\Mass0") != 0)
 		{
 			dprintf("GAME_NOT_MOUNTED_TRYING_HDD\n");
@@ -51,8 +55,6 @@ bool CheckGameMounted()
 	// Check USB0 is mounted
 	if (fopen_s(&fd1, "Usb0:\\test.tmp", "w") != 0)
 	{
-		// dprintf(MSG_ERROR MSG_GAME_NOT_MOUNTED_TRYING_USB);
-		// fclose(fd1);
 		if (mount("Usb0:", "\\Device\\Mass0") != 0)
 		{
 			dprintf("Warning: USB0 not mounted\n");
@@ -68,8 +70,6 @@ bool CheckGameMounted()
 	// Check USB1 is mounted
 	if (fopen_s(&fd1, "Usb1:\\test.tmp", "w") != 0)
 	{
-		// dprintf(MSG_ERROR MSG_GAME_NOT_MOUNTED_TRYING_USB);
-		// fclose(fd1);
 		if (mount("Usb1:", "\\Device\\Mass1") != 0)
 		{
 			dprintf("Warning: USB1 not mounted\n");
@@ -85,7 +85,7 @@ bool CheckGameMounted()
 	// Check HDD is mounted
 	if (fopen_s(&fd1, "Hdd:\\test.tmp", "w") != 0)
 	{
-		if (mount("Hdd:", "\\Device\\Mass1") != 0)
+		if (mount("Hdd:", "\\Device\\Harddisk0\\Partition1") != 0)
 		{
 			dprintf("Warning: Hdd not mounted\n");
 			return false;
@@ -117,7 +117,7 @@ int findIso(const char *folder, char *isoFile, int len)
 			std::cout << ent->d_name << "\n";
 			int nameLength = strlen(ent->d_name);
 
-			if (strcmp(&(ent->d_name[nameLength - strlen(".iso.001")]), ".iso.001") == 0)
+			if (strlen(ent->d_name) > strlen(".iso.001") && strcmp(&(ent->d_name[nameLength - strlen(".iso.001")]), ".iso.001") == 0)
 			{ // identical strings
 				strncpy(isoFile, ent->d_name, len);
 				return (strlen(ent->d_name) < len) ? EXIT_SUCCESS : EXIT_FAILURE;
@@ -228,37 +228,37 @@ static int DeleteSplitFiles(const char *firstPartFile)
 	return result;
 }
 
-int getGame(const char *URL, const char *sevenZipFile, const char *isoFolder, const char *outputFolder)
+int getGame(const std::string URL, const std::string sevenZipFile, const std::string isoFolder, const std::string outputFolder)
 {
-	if (downloadFileHTTPS(URL, sevenZipFile, NULL, NULL, dprintf) == false)
+	if (downloadFileHTTPS(URL, sevenZipFile, NULL, NULL, true, dprintf) == false)
 	{
 		return EXIT_FAILURE;
 	}
 
-	customForceMkdir(isoFolder);
+	customForceMkdir(isoFolder.c_str());
 
-	printf("Extracting %s\n", sevenZipFile); //Debug
+	std::cout << "Extracting " << sevenZipFile << "\n"; // Debug
 
-	if (decompressSevenZipFile(sevenZipFile, isoFolder) == EXIT_FAILURE)
+	if (decompressSevenZipFile(sevenZipFile.c_str(), isoFolder.c_str()) == EXIT_FAILURE)
 	{
 		return EXIT_FAILURE;
 	}
 
-	if (DeleteSplitFiles(sevenZipFile) != EXIT_SUCCESS)
+	if (DeleteSplitFiles(sevenZipFile.c_str()) != EXIT_SUCCESS)
 	{
 		dprintf("Warning: failed to delete all 7z parts after 7z extraction\n");
 	}
 
-	char isoFile[250];
-	char temp[250];
+	char isoFile[MAX_TEXT_LENGTH];
+	char temp[MAX_TEXT_LENGTH];
 
-	if (findIso(isoFolder, isoFile, sizeof(isoFile)) == EXIT_FAILURE)
+	if (findIso(isoFolder.c_str(), isoFile, sizeof(isoFile)) != EXIT_SUCCESS)
 	{
-		dprintf("Failed to find .iso.001 file in %s\n", isoFolder);
+		dprintf("Failed to find .iso.001 file in %s\n", isoFolder.c_str());
 		return EXIT_FAILURE;
 	}
 
-	strcpy(temp, isoFolder);
+	strncpy(temp, isoFolder.c_str(), MAX_TEXT_LENGTH);
 
 	if (temp[strlen(temp) - 1] != '\\' && temp[strlen(temp) - 1] != '/')
 	{
@@ -267,20 +267,20 @@ int getGame(const char *URL, const char *sevenZipFile, const char *isoFolder, co
 
 	strcat(temp, isoFile);
 
-	customForceMkdir(outputFolder);
+	customForceMkdir(outputFolder.c_str());
 
-	if (extractIso(temp, outputFolder) != 0)
+	if (extractIso(temp, outputFolder.c_str()) != 0)
 	{
 		return EXIT_FAILURE;
 	}
 
-	if (DeleteSplitFiles(temp) != EXIT_SUCCESS)
-	{
-		dprintf("Warning: failed to delete all ISO parts after ISO extraction\n");
-	}
+	// if (DeleteSplitFiles(temp) != EXIT_SUCCESS)
+	// {
+	// 	dprintf("Warning: failed to delete all ISO parts after ISO extraction\n");
+	// }
 
 	char isoFolderToDelete[250];
-	strncpy(isoFolderToDelete, isoFolder, sizeof(isoFolderToDelete) - 2);
+	strncpy(isoFolderToDelete, isoFolder.c_str(), sizeof(isoFolderToDelete) - 2);
 	isoFolderToDelete[sizeof(isoFolderToDelete) - 2] = '\0';
 
 	size_t isoFolderToDeleteLen = strlen(isoFolderToDelete);
@@ -294,7 +294,7 @@ int getGame(const char *URL, const char *sevenZipFile, const char *isoFolder, co
 
 	if (deleteDirectory(isoFolderToDelete, isoFolderToDeleteLen) == EXIT_FAILURE)
 	{
-		dprintf("Warning: failed to delete %s after ISO extraction\n", isoFolder);
+		dprintf("Warning: failed to delete %s after ISO extraction\n", isoFolder.c_str());
 	}
 
 	dprintf("Processing files Success! Your game has been downloaded and processed!\n");
@@ -363,7 +363,7 @@ struct Settings getSettings()
 {
 	struct Settings settings;
 
-	strcpy(settings.outputPath, "game:"); // default back to where ever the xex file was launched from
+	strcpy(settings.outputPath, "Usb0:"); // default back to where ever the xex file was launched from
 
 	FILE *fd = fopen(SETTINGS_FILE, "r");
 
@@ -373,7 +373,7 @@ struct Settings getSettings()
 		return settings;
 	}
 
-	char buff[256];
+	char buff[MAX_TEXT_LENGTH];
 
 	while (fgets(buff, sizeof(buff), fd) != NULL)
 	{
@@ -388,7 +388,7 @@ struct Settings getSettings()
 
 			value[strcspn(value, "\r\n")] = '\0';
 
-			strcpy(settings.outputPath, value);
+			strncpy(settings.outputPath, value, MAX_TEXT_LENGTH - strlen("output-path: "));
 		}
 	}
 
@@ -405,12 +405,10 @@ int main()
 
 	dprintf("free60 store 0.0.1 alpha\n");
 
-	char selectedGameURL[512];
-	char selectedGameName[256];
-	char safeGameFolderName[256];
-	char outputFolder[512];
-	selectedGameURL[0] = '\0';
-	selectedGameName[0] = '\0';
+	char selectedGameURL[MAX_TEXT_LENGTH] = "";
+	char selectedGameName[MAX_TEXT_LENGTH] = "";
+	char safeGameFolderName[MAX_TEXT_LENGTH] = "";
+	char outputFolder[MAX_TEXT_LENGTH] = "";
 
 	if (showUI(selectedGameURL, sizeof(selectedGameURL), selectedGameName, sizeof(selectedGameName)) == EXIT_SUCCESS)
 	{
@@ -427,7 +425,8 @@ int main()
 	MakeSafeFolderName(selectedGameName, safeGameFolderName, sizeof(safeGameFolderName));
 	_snprintf(outputFolder, sizeof(outputFolder), "%s\\%s", settings.outputPath, safeGameFolderName);
 	outputFolder[sizeof(outputFolder) - 1] = '\0';
+
 	dprintf("Extracting to: %s\n", outputFolder);
 
-	return getGame(selectedGameURL, "game:\\tmp.7z.001", "game:\\tmp_output", outputFolder);
+	return getGame(std::string(selectedGameURL), "game:\\tmp.7z.001", "game:\\tmp_output", outputFolder);
 }

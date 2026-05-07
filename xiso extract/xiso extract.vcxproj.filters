@@ -29,6 +29,9 @@
     <ClCompile Include="win32\getopt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FAT32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="extract-xiso.h">
@@ -44,6 +47,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="win32\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FAT32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

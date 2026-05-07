@@ -8,6 +8,15 @@
 #include <stdlib.h>
 #include "win32/dirent.h"
 
+#include "FAT32.h"
+#include <settings.h>
+
+#ifdef WIN32
+// #include <io.h>
+#define F_OK 0
+#define access _access
+#endif
+
 // #include <stdbool.h>
 
 // List of needed functions:
@@ -29,6 +38,203 @@ getcwd: duh!
 #endif
 
 #define arrayLength(x) (sizeof(x) / sizeof(x[0]))
+
+#include <xtl.h>
+// #include <io.h>
+#include <fcntl.h>
+// #include <errno.h>
+#include <stdint.h>
+
+static int xbox_open_set_errno(DWORD err)
+{
+    switch (err)
+    {
+    case ERROR_FILE_NOT_FOUND:
+    case ERROR_PATH_NOT_FOUND:
+        errno = ENOENT;
+        break;
+
+    case ERROR_ACCESS_DENIED:
+    case ERROR_SHARING_VIOLATION:
+        errno = EACCES;
+        break;
+
+    case ERROR_FILE_EXISTS:
+    case ERROR_ALREADY_EXISTS:
+        errno = EEXIST;
+        break;
+
+    case ERROR_INVALID_PARAMETER:
+    case ERROR_INVALID_NAME:
+        errno = EINVAL;
+        break;
+
+    default:
+        errno = EIO;
+        break;
+    }
+
+    return -1;
+}
+
+void touch_file(const char *filename)
+{
+    extern bool CheckGameMounted();
+    CheckGameMounted();
+
+    printf("Creating %s\n", filename);
+    int fp = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644); // "a" opens for appending; creates if doesn't exist
+    if (fp > NULL)
+    {
+        close(fp);
+    } else {
+        printf("Failed to create %s, ERROR: %d\n", filename, errno);
+    }
+}
+
+bool needsFat32LongNameWorkaround(const char *fileName) {
+    const char *firstDot = strchr(fileName, '.');
+    const char *lastDot  = strrchr(fileName, '.');
+    return firstDot && lastDot && firstDot != lastDot && (firstDot - fileName) <= 9;
+}
+
+int xbox_open(const char *filepath, int flags, int mode)
+{
+    int fd = NULL;
+
+    printf("Opening %s\n", filepath);
+
+    char folderPath[MAX_TEXT_LENGTH] = "";
+    char fileName[MAX_TEXT_LENGTH] = "";
+
+    if(!splitPathFolderFile(filepath, folderPath, MAX_TEXT_LENGTH, fileName, MAX_TEXT_LENGTH) ) {
+        printf("ERROR SPLITTING FILE PATH THING\n\n\n");
+    }
+
+    if (!needsFat32LongNameWorkaround(fileName))
+    {
+        return open(filepath, flags, mode); // pass on the call
+    }
+
+    if (access(filepath, 0) != -1)
+    { // from official microsoft docs
+        // file exists, pass on the open call
+        printf("\n%s Exists\n\n", filepath);
+
+        return open(filepath, flags, mode);
+    }
+
+    printf("\n%s does not Exist\n\n", filepath);
+
+    // now for the difficult part. Because Microsoft, in all of their wisdom, decided to keep DOS 8.3
+    // file compatibility on the Xbox 360, 12 character file names in the form "file.aaa.bbb" will be
+    // converted to "file.bbb". To overcome this, this section of code directly writes to \\device\\MassX
+
+    char tempFilePath[MAX_TEXT_LENGTH] = "";
+    char finalFilePath[MAX_TEXT_LENGTH] = "";
+
+    if(strcmp(folderPath, ".\\") == 0) { // strings are the same
+        getcwd(folderPath, MAX_TEXT_LENGTH);
+
+        const int pathLength = strlen(folderPath);
+        if(folderPath[pathLength] != '\\') {
+            folderPath[pathLength] = '\\';
+            folderPath[pathLength + 1] = '\0'; //Append a \ to the end of the path
+        }
+    }
+
+    static int tmpFileIndex = 0; //different temp file name each time
+
+    _snprintf(tempFilePath, MAX_TEXT_LENGTH, "%sTMP%05d.TMP", folderPath, tmpFileIndex);
+    _snprintf(finalFilePath, MAX_TEXT_LENGTH, "%s%s", folderPath, fileName);
+
+    tmpFileIndex++;
+
+    printf("Creating %s\n", tempFilePath);
+    touch_file(tempFilePath); // Create a temp file
+
+    printf("Force renaming to %s\n", finalFilePath);
+    if (Fat32RenameUsb1(tempFilePath, finalFilePath) != EXIT_SUCCESS)
+    {
+        printf("Failed to rename %s\n\n", filepath);
+        return -1;
+    }
+
+    fd = open(filepath, flags, mode);
+
+    return fd;
+}
+
+int splitPathFolderFile(const char *path,
+                        char *folder,
+                        int folderLen,
+                        char *file,
+                        int fileLen)
+{
+    const char *lastSlash = NULL;
+    const char *p;
+    size_t folderSize;
+    size_t fileSize;
+
+    if (!path || !folder || !file || folderLen <= 0 || fileLen <= 0)
+        return -1;
+
+    folder[0] = '\0';
+    file[0] = '\0';
+
+    for (p = path; *p; ++p)
+    {
+        if (*p == '\\' || *p == '/')
+            lastSlash = p;
+    }
+
+    if (lastSlash)
+    {
+        folderSize = (size_t)(lastSlash - path) + 1;
+        fileSize = strlen(lastSlash + 1);
+
+        if (folderSize >= (size_t)folderLen || fileSize >= (size_t)fileLen)
+            return -1;
+
+        memcpy(folder, path, folderSize);
+        folder[folderSize] = '\0';
+        strncpy(file, lastSlash + 1, fileLen - 1);
+        file[fileLen - 1] = '\0';
+    }
+    else
+    {
+        const char *colon = strchr(path, ':');
+
+        if (colon)
+        {
+            folderSize = (size_t)(colon - path) + 2;
+            fileSize = strlen(colon + 1);
+
+            if (folderSize + 1 >= (size_t)folderLen || fileSize >= (size_t)fileLen)
+                return -1;
+
+            memcpy(folder, path, folderSize);
+            folder[folderSize] = '\\';
+            folder[folderSize + 1] = '\0';
+            strncpy(file, colon + 1, fileLen - 1);
+            file[fileLen - 1] = '\0';
+        }
+        else
+        {
+            if (folderLen < 3 || strlen(path) >= (size_t)fileLen)
+                return -1;
+
+            strcpy(folder, ".\\");
+            strncpy(file, path, fileLen - 1);
+            file[fileLen - 1] = '\0';
+        }
+    }
+
+    if (file[0] == '\0')
+        return -1;
+
+    return 0;
+}
 
 typedef struct fileInfo
 {
@@ -152,7 +358,7 @@ static void normalizePath(const char *inputPath, char *outputPath, size_t output
 
 static void resolvePath(const char *inputPath, char *outputPath, size_t outputPathSize)
 {
-    char combinedPath[300];
+    char combinedPath[MAX_TEXT_LENGTH];
 
     if (inputPath == NULL || outputPath == NULL || outputPathSize == 0)
     {
@@ -167,11 +373,11 @@ static void resolvePath(const char *inputPath, char *outputPath, size_t outputPa
 
     if (currentWorkingDir[strlen(currentWorkingDir) - 1] == '\\' || currentWorkingDir[strlen(currentWorkingDir) - 1] == '/')
     {
-        sprintf(combinedPath, "%s%s", currentWorkingDir, inputPath);
+        _snprintf(combinedPath, MAX_TEXT_LENGTH, "%s%s", currentWorkingDir, inputPath);
     }
     else
     {
-        sprintf(combinedPath, "%s\\%s", currentWorkingDir, inputPath);
+        _snprintf(combinedPath, MAX_TEXT_LENGTH, "%s\\%s", currentWorkingDir, inputPath);
     }
 
     normalizePath(combinedPath, outputPath, outputPathSize);
@@ -181,10 +387,14 @@ int customOpen(const char *filename,
                int oflag,
                int pmode)
 {
-    char baseFileName[250];
-    char tempFileName[300];
+    char baseFileName[MAX_TEXT_LENGTH];
+    char tempFileName[MAX_TEXT_LENGTH];
 
     resolvePath(filename, tempFileName, sizeof(tempFileName));
+
+    if(strlen(tempFileName) <= 4) { // obviously not a split ISO
+        return xbox_open(filename, oflag, pmode);
+    }
 
     strcpy(baseFileName, tempFileName);
     baseFileName[strlen(baseFileName) - 4] = '\0'; // remove last 4 digits (.001)
@@ -197,7 +407,8 @@ int customOpen(const char *filename,
         {
             char tempBuff[250];
             sprintf(tempBuff, "%s.%03d", baseFileName, partIndex);
-            if ((openFiles[partIndex - 1].fd = open(tempBuff, oflag, pmode)) < 0)
+            // if ((openFiles[partIndex - 1].fd = open(tempBuff, oflag, pmode)) < 0)
+            if ((openFiles[partIndex - 1].fd = xbox_open(tempBuff, oflag, pmode)) < 0)
             {
                 openFiles[partIndex - 1].isOpen = false;
                 printf("WARNING! failed to open %s\n", tempBuff);
@@ -212,7 +423,8 @@ int customOpen(const char *filename,
     }
     else
     {
-        return open(tempFileName, oflag, pmode); // pass on the call, nothing special
+        // return open(tempFileName, oflag, pmode); // pass on the call, nothing special
+        return xbox_open(tempFileName, oflag, pmode); // pass on the call, nothing special
     }
 }
 
@@ -458,6 +670,23 @@ int chdir(const char *dirname)
     char tempDirName[300];
 
     resolvePath(dirname, tempDirName, sizeof(tempDirName));
+
+    if(tempDirName == NULL) {
+        return -1;
+    }
+
+    DIR* dir = opendir(tempDirName);
+    if (dir) {
+        /* Directory exists. */
+        closedir(dir);
+    } else if (ENOENT == errno) {
+        /* Directory does not exist. */
+        return -1;
+    } else {
+        /* opendir() failed for some other reason. */
+        printf("Warning: opendir failed\n\n");
+    }
+
     strncpy(currentWorkingDir, tempDirName, sizeof(currentWorkingDir) - 1);
     currentWorkingDir[sizeof(currentWorkingDir) - 1] = '\0';
     return 0; // success
@@ -489,7 +718,8 @@ int deleteDirectory(const char *directoryToDelete, const size_t len)
 {
     DIR *dir = opendir(directoryToDelete);
 
-    if(dir == NULL) {
+    if (dir == NULL)
+    {
         printf("Failed to open %s\n", directoryToDelete);
         return EXIT_FAILURE;
     }
@@ -499,7 +729,7 @@ int deleteDirectory(const char *directoryToDelete, const size_t len)
     while (entity != NULL)
     {
         char path[256] = "";
-		strcpy(path, directoryToDelete);
+        strcpy(path, directoryToDelete);
 
         printf("%s\n", entity->d_name);
         strcat(path, entity->d_name);
@@ -508,7 +738,7 @@ int deleteDirectory(const char *directoryToDelete, const size_t len)
         entity = readdir(dir);
     }
     char path1[256] = "";
-	strcpy(path1, directoryToDelete);
+    strcpy(path1, directoryToDelete);
     rmdir(path1);
     closedir(dir);
     // char out[256] = "OUTPUT/";

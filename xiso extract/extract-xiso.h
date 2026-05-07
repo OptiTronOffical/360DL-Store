@@ -12,6 +12,10 @@
 #define _WIN32
 #define WIN32
 
+#define READFLAGS O_RDONLY | O_BINARY
+#define WRITEFLAGS O_WRONLY | O_CREAT | O_TRUNC | O_BINARY
+#define READWRITEFLAGS O_RDWR | O_BINARY
+
 int extractIso(const char *isoPath, const char *pathToExtractTo);
 
 #endif

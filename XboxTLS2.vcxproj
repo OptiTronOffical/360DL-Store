@@ -114,7 +114,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_DEBUG;_XBOX</PreprocessorDefinitions>
       <CallAttributedProfiling>Callcap</CallAttributedProfiling>
-      <AdditionalIncludeDirectories>C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\SSL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SSL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
@@ -220,7 +220,7 @@
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <SetChecksum>true</SetChecksum>
       <AdditionalDependencies>xapilib.lib;d3d9.lib;d3dx9.lib;xgraphics.lib;xboxkrnl.lib;xnet.lib;xaudio2.lib;xact3.lib;x3daudio.lib;xmcore.lib;vcomp.lib;xuihtml.lib;xuirun.lib;xuirender.lib;xuivideo.lib;xmedia2.lib;AtgFramework.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\stand\Programing_Local\C\XBOX\projects\XboxTLS\Common\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Common\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
@@ -631,7 +631,7 @@
     <ClCompile Include="XboxTLS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\7z decompress\7z decompress.vcxproj">
+    <ProjectReference Include="7zip\7z decompress.vcxproj">
       <Project>{72c76e7e-0fd5-4f98-ba8e-fb2afebf5f93}</Project>
     </ProjectReference>
     <ProjectReference Include="Common\AtgFramework2010.vcxproj">

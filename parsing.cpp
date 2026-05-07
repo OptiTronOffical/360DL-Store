@@ -202,7 +202,7 @@ int parseURL(const char *URL, char *domain, char *path)
 		return -1;
 	}
 	strcpy(tempURL, URL);
-    tempURL[8] = '\0'; // https:// part of the string
+    tempURL[strlen("https://")] = '\0'; // https:// part of the string
 
     for (int i = 0; tempURL[i] && i < 10; i++)
     {

@@ -1271,7 +1271,7 @@ left_processed:
 					}
 					else
 					{
-						exiso_log("%s%s%s (%u bytes)%s", in_mode == k_extract ? "extracting " : "", in_path, dir->filename, dir->file_size, "");
+						exiso_log("%s%s%s (%u bytes)%s\n", in_mode == k_extract ? "extracting " : "", in_path, dir->filename, dir->file_size, "");
 						flush();
 						exiso_log("\n");
 					}
@@ -1615,7 +1615,7 @@ int extract_file(int in_xiso, dir_node *in_file, modes in_mode, char *path)
 		{
 			if (in_file->file_size == 0)
 			{
-				exiso_log("%s%s%s (0 bytes) [100%%]%s\r", in_mode == k_extract ? "extracting " : "", path, in_file->filename, "");
+				exiso_log("%s%s%s (0 bytes) [100%%]%s\n", in_mode == k_extract ? "extracting " : "", path, in_file->filename, "");
 			}
 			else
 			{
@@ -1638,7 +1638,7 @@ int extract_file(int in_xiso, dir_node *in_file, modes in_mode, char *path)
 					}
 					totalsize += read_size;
 					totalpercent = (totalsize * 100.0) / in_file->file_size;
-					exiso_log("%s%s%s (%u bytes) [%u%%]%s\r", in_mode == k_extract ? "extracting " : "", path, in_file->filename, in_file->file_size, totalpercent, "");
+					exiso_log("%s%s%s (%u bytes) [%u%%]%s\n", in_mode == k_extract ? "extracting " : "", path, in_file->filename, in_file->file_size, totalpercent, "");
 
 					i += read_size;
 					size = min(in_file->file_size - i, READWRITE_BUFFER_SIZE);

@@ -11,6 +11,8 @@
 #include "vimms_lair.h"
 
 #define TEXTBUFFER_SIZE (1024 * 10)
+#define HTML_BUFFER_CAPACITY (1024 * 1024 * 4);
+
 
 static std::string UrlEncodeQuery(const std::string &value)
 {
@@ -326,7 +328,6 @@ DWORD OpenKeyboardToString(
 
 int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 {
-    const unsigned long long HTML_BUFFER_CAPACITY = 1024 * 1024 * 4;
     unsigned long long OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
 
     char *buffer = (char *)malloc(OUTPUT_BUFFER_SIZE); // 4MB buffer just to be safe
@@ -351,7 +352,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 
     searchURL.append(UrlEncodeQuery(gameSearchString));
 
-    if (downloadFileHTTPS(searchURL.c_str(), NULL, buffer, &OUTPUT_BUFFER_SIZE, dprintf) == false)
+    if (downloadFileHTTPS(searchURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
     { // downloads into a null terminated buffer
         std::cout << "Download failed\n";
         free(buffer);
@@ -395,7 +396,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 	// Now download the selected game
 
     OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
-    if (downloadFileHTTPS(selectedURL.c_str(), NULL, buffer, &OUTPUT_BUFFER_SIZE, dprintf) == false)
+    if (downloadFileHTTPS(selectedURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
     { // downloads into a null terminated buffer
         std::cout << "Download failed\n";
         free_game_list(&list);

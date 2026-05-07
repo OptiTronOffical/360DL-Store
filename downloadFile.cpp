@@ -281,7 +281,22 @@ unsigned long long getClockLong()
     return (unsigned long long)clock();
 }
 
-int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, unsigned long long *outputBufferSize, void printFunction(const char *_format, ...))
+// Function to check if a string ends with another string
+bool endsWith(const std::string &fullString,
+              const std::string &ending)
+{
+    // Check if the ending string is longer than the full
+    // string
+    if (ending.size() > fullString.size())
+        return false;
+
+    // Compare the ending of the full string with the target
+    // ending
+    return fullString.compare(fullString.size() - ending.size(),
+                              ending.size(), ending) == 0;
+}
+
+int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBuffer, unsigned long long *outputBufferSize, void printFunction(const char *_format, ...))
 {
     unsigned long long outputBufferSizeConst = 0;
 
@@ -330,16 +345,16 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
     FILE *file = NULL;
     if (!writeToBuffer)
     {
-        if (strlen(filename) >= strlen(".001") && strcmp(&filename[strlen(filename) - strlen(".001")], ".001") == 0)
+        if (endsWith(filename, std::string(".001")))
         {
             splitFile = true;
             std::cout << "Split file detected\n";
         }
-        file = fopen(filename, "wb");
+        file = fopen(filename.c_str(), "wb");
 
         if (file == NULL)
         {
-            printFunction("Failed to open file %s\n", filename);
+            printFunction("Failed to open file %s\n", filename.c_str());
             free(buffer);
             free(fileBuffer);
             return EXIT_FAILURE;
@@ -367,7 +382,7 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
 
     if (!writeToBuffer)
     {
-        splitFilename = strdup(filename);
+        splitFilename = strdup(filename.c_str());
     }
 
     while ((!headersDone || writeToBuffer) && (r = XboxTLS_Read(ctx, buffer, BUFFER_SIZE)) > 0)
@@ -378,7 +393,7 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
         if (writeToBuffer && totalWritten + r >= outputBufferSizeConst)
         {
             printFunction("Output Buffer Exhausted\n");
-            return EXIT_FAILURE;
+            goto failure;
         }
 
         if (!headersDone)
@@ -398,7 +413,7 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
                 if (headerLen >= (int)sizeof(headerBuffer))
                 {
                     printFunction("HTTP headers too large\n");
-                    break;
+                    goto failure;
                 }
 
                 continue;
@@ -416,7 +431,7 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
             totalContentLength = parseContentLength(headerBuffer, headerEnd);
 
             int status = parseStatus(headerBuffer, headerEnd);
-            
+
             if (status != 200)
             {
                 printFunction("Status: %d\n", status);
@@ -432,8 +447,8 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
                 default:
                     break;
                 }
-                
-				goto failure;
+
+                goto failure;
             }
         }
 
@@ -442,13 +457,13 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
             if (!WriteChunkedBody(&chunkedState, file, body, bodyLen, &totalWritten, outputBuffer))
             {
                 printFunction("Failed to decode chunked HTTP body\n");
-                break;
+                goto failure;
             }
         }
         else if (!WriteBody(file, body, bodyLen, &totalWritten, outputBuffer))
         {
             printFunction("Failed to write to file\n");
-            break;
+            goto failure;
         }
 
         endTime = (getClockLong() * (unsigned long long)1000) / (CLOCKS_PER_SEC);
@@ -612,7 +627,7 @@ int DumpResponse(XboxTLSContext *ctx, const char *filename, char *outputBuffer, 
     if (totalWritten != totalContentLength && totalContentLength != 0)
     {
         ERROR("Download has likely failed");
-        return EXIT_FAILURE;
+        goto failure;
     }
 
     if (splitFilename != NULL)
@@ -647,31 +662,59 @@ failure:
     return EXIT_FAILURE;
 }
 
-bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, unsigned long long *outputBufferSize, void printFunction(const char *_format, ...))
-{
-    if (fileName != NULL)
+int addTrustAnchors(XboxTLSContext *ctx) {
+    // Set the hash algorithm to use for certificate validation (used by both EC and RSA trust anchors).
+    // Note: SHA-384 is commonly used with modern certificates (e.g., GTS Root R4, ISRG Root X1),
+    //       but this can be changed to SHA-256, SHA-512, etc., depending on the CA's signature.
+    ctx->hashAlgo = XboxTLS_Hash_SHA384;
+
+    // Step 3.1: Add EC trust anchor (if site uses this key type)
+    if (!XboxTLS_AddTrustAnchor_EC(ctx, TA0_DN, sizeof(TA0_DN), TA0_EC_Q, sizeof(TA0_EC_Q), XboxTLS_Curve_secp384r1))
     {
-        std::cout << "Parsing " << URL << " and downloading into " << fileName << "\n";
+        return EXIT_FAILURE;
     }
 
-    // const char *domain = "dl3.vimm.net";
-    // const char *path = "/?mediaId=75617";
-    char *domain; // = "physics.brad-tech.net";
-    char *path;   // = "/setup.exe";
+    if (!XboxTLS_AddTrustAnchor_EC(ctx, EC_DN, sizeof(EC_DN), EC_Q, sizeof(EC_Q), XboxTLS_Curve_secp384r1))
+    {
+        return EXIT_FAILURE;
+    }
 
-    if ((domain = (char *)malloc(strlen(URL) + 1)) == NULL)
+    if (!XboxTLS_AddTrustAnchor_RSA(ctx, RSA_DN, sizeof(RSA_DN), RSA_N, sizeof(RSA_N), RSA_E, sizeof(RSA_E)))
+    {
+        return EXIT_FAILURE;
+    }
+
+    if (!XboxTLS_AddTrustAnchor_RSA(ctx, TA0_RSA_DN, sizeof(TA0_RSA_DN), TA0_RSA_N, sizeof(TA0_RSA_N), TA0_RSA_E, sizeof(TA0_RSA_E)))
+    {
+        return EXIT_FAILURE;
+    }
+
+    if (!XboxTLS_AddTrustAnchor_RSA(ctx, IA_TA0_RSA_DN, sizeof(IA_TA0_RSA_DN), IA_TA0_RSA_N, sizeof(IA_TA0_RSA_N), IA_TA0_RSA_E, sizeof(IA_TA0_RSA_E)))
+    {
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *dataBuffer, unsigned long long *outputBufferSize, bool downloadIntoFile, void printFunction(const char *_format, ...))
+{
+    char *domain;
+    char *path;
+
+    if ((domain = (char *)malloc(URL.length() + 1)) == NULL)
     {
         ERROR("MALLOC failed");
         return false;
     }
-    if ((path = (char *)malloc(strlen(URL) + 1)) == NULL)
+    if ((path = (char *)malloc(URL.length() + 1)) == NULL)
     {
         ERROR("MALLOC failed");
         free(domain);
         return false;
     }
 
-    if (parseURL(URL, domain, path) != 0)
+    if (parseURL(URL.c_str(), domain, path) != 0)
     {
         std::cout << "ERROR parsing URL\n\n";
         free(domain);
@@ -700,8 +743,6 @@ bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, 
         return false;
     }
 
-    // Sleep(5000); // Give time for DHCP to settle, could probably lower this, but never tried.
-
     // Step 2: Create TLS context
     XboxTLSContext ctx;
     if (!XboxTLS_CreateContext(&ctx, domain))
@@ -712,46 +753,7 @@ bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, 
         return false;
     }
 
-    // Set the hash algorithm to use for certificate validation (used by both EC and RSA trust anchors).
-    // Note: SHA-384 is commonly used with modern certificates (e.g., GTS Root R4, ISRG Root X1),
-    //       but this can be changed to SHA-256, SHA-512, etc., depending on the CA's signature.
-    ctx.hashAlgo = XboxTLS_Hash_SHA384;
-
-    // Step 3.1: Add EC trust anchor (if site uses this key type)
-    if (!XboxTLS_AddTrustAnchor_EC(&ctx, TA0_DN, sizeof(TA0_DN), TA0_EC_Q, sizeof(TA0_EC_Q), XboxTLS_Curve_secp384r1))
-    {
-        ERROR("Couldn't add trust anchor");
-        free(domain);
-        free(path);
-        return false;
-    }
-
-    if (!XboxTLS_AddTrustAnchor_EC(&ctx, EC_DN, sizeof(EC_DN), EC_Q, sizeof(EC_Q), XboxTLS_Curve_secp384r1))
-    {
-        ERROR("Couldn't add trust anchor");
-        free(domain);
-        free(path);
-        return false;
-    }
-
-    if (!XboxTLS_AddTrustAnchor_RSA(&ctx, RSA_DN, sizeof(RSA_DN), RSA_N, sizeof(RSA_N), RSA_E, sizeof(RSA_E)))
-    {
-        ERROR("Couldn't add trust anchor");
-        free(domain);
-        free(path);
-        return false;
-    }
-
-    if (!XboxTLS_AddTrustAnchor_RSA(&ctx, TA0_RSA_DN, sizeof(TA0_RSA_DN), TA0_RSA_N, sizeof(TA0_RSA_N), TA0_RSA_E, sizeof(TA0_RSA_E)))
-    {
-        ERROR("Couldn't add trust anchor");
-        free(domain);
-        free(path);
-        return false;
-    }
-
-    if (!XboxTLS_AddTrustAnchor_RSA(&ctx, IA_TA0_RSA_DN, sizeof(IA_TA0_RSA_DN), IA_TA0_RSA_N, sizeof(IA_TA0_RSA_N), IA_TA0_RSA_E, sizeof(IA_TA0_RSA_E)))
-    {
+    if(addTrustAnchors(&ctx) != EXIT_SUCCESS) {
         ERROR("Couldn't add trust anchor");
         free(domain);
         free(path);
@@ -827,11 +829,7 @@ bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, 
     if (requestLen < 0 || requestLen >= (int)sizeof(request))
     {
         ERROR("HTTP request buffer too small");
-        XboxTLS_Free(&ctx);
-        WSACleanup();
-        free(domain);
-        free(path);
-        return false;
+        goto downloadFailed;
     }
 
     printFunction("Request: formatted %d bytes\n", requestLen);
@@ -839,23 +837,24 @@ bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, 
     if (XboxTLS_Write(&ctx, request, requestLen) < 0)
     {
         ERROR("Failed to send HTTPS request");
-        XboxTLS_Free(&ctx);
-        WSACleanup();
-        free(domain);
-        free(path);
-        return false;
+        goto downloadFailed;
     }
     printFunction("Request: send OK\n");
 
     // Step 7: Read and print response
-    if (DumpResponse(&ctx, fileName, dataBuffer, outputBufferSize, printFunction) == EXIT_FAILURE)
+    if (downloadIntoFile)
     {
-        ERROR("Failed to download data over HTTPS");
-        XboxTLS_Free(&ctx);
-        WSACleanup();
-        free(domain);
-        free(path);
-        return false;
+        if (DumpResponse(&ctx, fileName, NULL, NULL, printFunction) == EXIT_FAILURE)
+        {
+            ERROR("Failed to download data over HTTPS");
+            goto downloadFailed;
+        }
+    } else {
+        if (DumpResponse(&ctx, "", dataBuffer, outputBufferSize, printFunction) == EXIT_FAILURE)
+        {
+            ERROR("Failed to download data over HTTPS");
+            goto downloadFailed;
+        }
     }
 
     // Step 8: Cleanup
@@ -866,4 +865,15 @@ bool downloadFileHTTPS(const char *URL, const char *fileName, char *dataBuffer, 
     free(path);
 
     return true;
+
+downloadFailed:
+    XboxTLS_Free(&ctx);
+    WSACleanup();
+
+    XNetCleanup();
+
+    free(domain);
+    free(path);
+
+    return false;
 }

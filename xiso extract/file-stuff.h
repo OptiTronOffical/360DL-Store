@@ -39,4 +39,12 @@ char *getcwd(
 // Deletes a directory and all of its contents
 int deleteDirectory(const char *directoryToDelete, const size_t len);
 
+int xbox_open(const char *filename, int flags, int mode);
+
+int splitPathFolderFile(const char *path,
+                        char *folder,
+                        int folderLen,
+                        char *file,
+                        int fileLen);
+
 #endif
