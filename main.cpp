@@ -25,7 +25,7 @@
 
 struct Settings
 {
-	char outputPath[256];
+	char outputPath[MAX_TEXT_LENGTH];
 };
 
 bool CheckGameMounted()
@@ -120,6 +120,7 @@ int findIso(const char *folder, char *isoFile, int len)
 			if (strlen(ent->d_name) > strlen(".iso.001") && strcmp(&(ent->d_name[nameLength - strlen(".iso.001")]), ".iso.001") == 0)
 			{ // identical strings
 				strncpy(isoFile, ent->d_name, len);
+				closedir(dir);
 				return (strlen(ent->d_name) < len) ? EXIT_SUCCESS : EXIT_FAILURE;
 			}
 		}
@@ -259,6 +260,7 @@ int getGame(const std::string URL, const std::string sevenZipFile, const std::st
 	}
 
 	strncpy(temp, isoFolder.c_str(), MAX_TEXT_LENGTH);
+	temp[MAX_TEXT_LENGTH - 1] = '\0'; // null terminate
 
 	if (temp[strlen(temp) - 1] != '\\' && temp[strlen(temp) - 1] != '/')
 	{
@@ -388,7 +390,9 @@ struct Settings getSettings()
 
 			value[strcspn(value, "\r\n")] = '\0';
 
-			strncpy(settings.outputPath, value, MAX_TEXT_LENGTH - strlen("output-path: "));
+			strncpy(settings.outputPath, value, MAX_TEXT_LENGTH - 1);
+
+			settings.outputPath[MAX_TEXT_LENGTH - 1] = '\0'; // ensure the string is NULL terminated
 		}
 	}
 

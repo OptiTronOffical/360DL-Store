@@ -621,14 +621,14 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
         outputBuffer[totalWritten] = '\0';
     }
 
-    if (file != NULL)
-        fclose(file);
-
     if (totalWritten != totalContentLength && totalContentLength != 0)
     {
         ERROR("Download has likely failed");
         goto failure;
     }
+
+    if (file != NULL)
+        fclose(file);
 
     if (splitFilename != NULL)
         free(splitFilename);
@@ -738,6 +738,7 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0)
     {
         ERROR("Couldn't start WSA");
+        XNetCleanup();
         free(domain);
         free(path);
         return false;
@@ -748,6 +749,8 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     if (!XboxTLS_CreateContext(&ctx, domain))
     {
         ERROR("Couldn't create TLS context");
+        XNetCleanup();
+        WSACleanup();
         free(domain);
         free(path);
         return false;
@@ -755,6 +758,10 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
 
     if(addTrustAnchors(&ctx) != EXIT_SUCCESS) {
         ERROR("Couldn't add trust anchor");
+        XboxTLS_Free(&ctx);
+        WSACleanup();
+        XNetCleanup();
+
         free(domain);
         free(path);
         return false;
@@ -797,18 +804,13 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     if (ip[0] == 0)
     {
         ERROR("Failed to resolve DNS");
-        free(domain);
-        free(path);
-        return false;
+        goto downloadFailed;
     }
 
     // Step 5: Connect + TLS handshake
     if (!XboxTLS_Connect(&ctx, ip, domain, 443))
     {
-        XboxTLS_Free(&ctx);
-        free(domain);
-        free(path);
-        return false;
+        goto downloadFailed;
     }
 
     // Step 6: Send GET request
@@ -860,6 +862,7 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     // Step 8: Cleanup
     XboxTLS_Free(&ctx);
     WSACleanup();
+    XNetCleanup();
 
     free(domain);
     free(path);

@@ -23,7 +23,7 @@ The free60 store is a piece of homebrew for the Xbox 360 that allows games to be
 2. Transfer it to your console
 3. Launch it using your favourite file manager or dashboard
 4. Search for your favourite game
-5. Navigate the menu with ⬆️ and ⬇️
+5. Navigate the menu with ↑ and ↓
 6. Select a game by pressing A
 7. Select a version of the game
 8. Press A to begin the download
@@ -32,12 +32,11 @@ Currently, this program supports downloading directly from Vimms Lair. While the
 
 ## Compiling from the source
 
-Sadly, there is extremely little information around creating native Xbox 360 programs. If you are interested in creating or modifying Xbox 360 programs, I would recommend taking a look at [ClementDreptin's ModdingResources](https://github.com/ClementDreptin/ModdingResources/). While it is mainly focussed on developing dashlaunch plugings for modding games, much of the information applies to creating homebrew as well. 
+[See Compiling](COMPILING)
 
-1. Install Visual Studio 2010 and the official XDK
-2. From within Visual Studio 2010, open *free60 store.sln*
-3. Build each project individualy, ensuring you finish by building XboxTLS
-4. In the *Release* folder, find *XboxTLS.xex*. Transfer this to your console and launch it. 
+## How the Code Works
+
+[Read the Code Breakdown](how_it_works.md)
 
 ## Credits
 
@@ -47,6 +46,7 @@ Many thanks to all of the open source projects that made this possible, includin
 * [Simple 360 Nand Flasher](https://github.com/Swizzy/XDK_Projects) by Swizzy, to use as a base project to work from, as well as providing a simple, easy to use interface to output console style text to the screen
 * [extract-xiso](https://github.com/XboxDev/extract-xiso) by XboxDev, modified to extract ISO files directly on the Xbox itself
 * [LZMA SDK](https://www.7-zip.org/sdk.html), to decompress LZMA and LZMA 2 compressed 7z files
+* [Vimm's Lair](https://vimm.net/), without which this entire project would not have been possible
 
 ## Disclaimers
 
@@ -62,7 +62,9 @@ Many thanks to all of the open source projects that made this possible, includin
 * Optimise 7z decompression, potentially implimenting multithreading
 * Eliminate memory leaks
 * Impliment a better UI using xUI
-* Add support to download from ROMSFUN using flaresolver proxy
+* Add support to download from ROMSFUN using flaresolver proxy - unlikely
+* Add support to download from the Internet Archive
 * Potentially make use of the [triangle](https://github.com/JakobRangel/Triangle) frontend when it is made open source
+* Test to see if DOS 8.3 file name limitations affect FATX
 
 Pull Requests are welcome

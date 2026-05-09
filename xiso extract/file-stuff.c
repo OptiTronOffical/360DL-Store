@@ -3,6 +3,7 @@
 #include <io.h>
 #include <string.h>
 #include <errno.h>
+#include <ctype.h>
 
 #include <sys/stat.h>
 #include <stdlib.h>
@@ -87,14 +88,17 @@ void touch_file(const char *filename)
     if (fp > NULL)
     {
         close(fp);
-    } else {
+    }
+    else
+    {
         printf("Failed to create %s, ERROR: %d\n", filename, errno);
     }
 }
 
-bool needsFat32LongNameWorkaround(const char *fileName) {
+bool needsFat32LongNameWorkaround(const char *fileName)
+{
     const char *firstDot = strchr(fileName, '.');
-    const char *lastDot  = strrchr(fileName, '.');
+    const char *lastDot = strrchr(fileName, '.');
     return firstDot && lastDot && firstDot != lastDot && (firstDot - fileName) <= 9;
 }
 
@@ -107,7 +111,8 @@ int xbox_open(const char *filepath, int flags, int mode)
     char folderPath[MAX_TEXT_LENGTH] = "";
     char fileName[MAX_TEXT_LENGTH] = "";
 
-    if(!splitPathFolderFile(filepath, folderPath, MAX_TEXT_LENGTH, fileName, MAX_TEXT_LENGTH) ) {
+    if (splitPathFolderFile(filepath, folderPath, MAX_TEXT_LENGTH, fileName, MAX_TEXT_LENGTH) != EXIT_SUCCESS)
+    {
         printf("ERROR SPLITTING FILE PATH THING\n\n\n");
     }
 
@@ -133,17 +138,30 @@ int xbox_open(const char *filepath, int flags, int mode)
     char tempFilePath[MAX_TEXT_LENGTH] = "";
     char finalFilePath[MAX_TEXT_LENGTH] = "";
 
-    if(strcmp(folderPath, ".\\") == 0) { // strings are the same
+    if (strcmp(folderPath, ".\\") == 0)
+    { // strings are the same
         getcwd(folderPath, MAX_TEXT_LENGTH);
 
         const int pathLength = strlen(folderPath);
-        if(folderPath[pathLength] != '\\') {
-            folderPath[pathLength] = '\\';
-            folderPath[pathLength + 1] = '\0'; //Append a \ to the end of the path
+        if (folderPath[pathLength - 1] != '\\') // if the path does NOT end with "\"
+        {
+            strcat(folderPath, "\\");
         }
     }
 
-    static int tmpFileIndex = 0; //different temp file name each time
+    char lowerCaseFolderName[MAX_TEXT_LENGTH] = "";
+
+    for (int i = 0; folderPath[i] && i < MAX_TEXT_LENGTH; i++)
+    {
+        lowerCaseFolderName[i] = tolower(folderPath[i]);
+    }
+
+    if(strstr(lowerCaseFolderName, "usb") != lowerCaseFolderName) { // does NOT begin with "usb"
+        printf("WARNING: %s%s NOT on a FAT32 USB device\n\n", folderPath, fileName);
+        return open(filepath, flags, mode);
+    }
+
+    static int tmpFileIndex = 0; // different temp file name each time
 
     _snprintf(tempFilePath, MAX_TEXT_LENGTH, "%sTMP%05d.TMP", folderPath, tmpFileIndex);
     _snprintf(finalFilePath, MAX_TEXT_LENGTH, "%s%s", folderPath, fileName);
@@ -177,7 +195,7 @@ int splitPathFolderFile(const char *path,
     size_t fileSize;
 
     if (!path || !folder || !file || folderLen <= 0 || fileLen <= 0)
-        return -1;
+        return EXIT_FAILURE;
 
     folder[0] = '\0';
     file[0] = '\0';
@@ -194,7 +212,7 @@ int splitPathFolderFile(const char *path,
         fileSize = strlen(lastSlash + 1);
 
         if (folderSize >= (size_t)folderLen || fileSize >= (size_t)fileLen)
-            return -1;
+            return EXIT_FAILURE;
 
         memcpy(folder, path, folderSize);
         folder[folderSize] = '\0';
@@ -211,7 +229,7 @@ int splitPathFolderFile(const char *path,
             fileSize = strlen(colon + 1);
 
             if (folderSize + 1 >= (size_t)folderLen || fileSize >= (size_t)fileLen)
-                return -1;
+                return EXIT_FAILURE;
 
             memcpy(folder, path, folderSize);
             folder[folderSize] = '\\';
@@ -222,7 +240,7 @@ int splitPathFolderFile(const char *path,
         else
         {
             if (folderLen < 3 || strlen(path) >= (size_t)fileLen)
-                return -1;
+                return EXIT_FAILURE;
 
             strcpy(folder, ".\\");
             strncpy(file, path, fileLen - 1);
@@ -231,9 +249,9 @@ int splitPathFolderFile(const char *path,
     }
 
     if (file[0] == '\0')
-        return -1;
+        return EXIT_FAILURE;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 typedef struct fileInfo
@@ -245,7 +263,7 @@ typedef struct fileInfo
 static char currentWorkingDir[250] = "game:\\";
 
 static fileInfo openFiles[10] = {
-    {0, false},
+    {-1, false},
 };
 
 static long long splitFilePointer = 0;
@@ -392,8 +410,9 @@ int customOpen(const char *filename,
 
     resolvePath(filename, tempFileName, sizeof(tempFileName));
 
-    if(strlen(tempFileName) <= 4) { // obviously not a split ISO
-        return xbox_open(filename, oflag, pmode);
+    if (strlen(tempFileName) <= 4)
+    { // obviously not a split ISO
+        return xbox_open(tempFileName, oflag, pmode);
     }
 
     strcpy(baseFileName, tempFileName);
@@ -405,8 +424,8 @@ int customOpen(const char *filename,
         // Now do the hard bit
         while (partIndex <= 10) // ok ChatGPT, I will add a bounds check
         {
-            char tempBuff[250];
-            sprintf(tempBuff, "%s.%03d", baseFileName, partIndex);
+            char tempBuff[MAX_TEXT_LENGTH];
+            _snprintf(tempBuff, MAX_TEXT_LENGTH, "%s.%03d", baseFileName, partIndex);
             // if ((openFiles[partIndex - 1].fd = open(tempBuff, oflag, pmode)) < 0)
             if ((openFiles[partIndex - 1].fd = xbox_open(tempBuff, oflag, pmode)) < 0)
             {
@@ -671,20 +690,21 @@ int chdir(const char *dirname)
 
     resolvePath(dirname, tempDirName, sizeof(tempDirName));
 
-    if(tempDirName == NULL) {
+    if (tempDirName == NULL)
+    {
         return -1;
     }
 
-    DIR* dir = opendir(tempDirName);
-    if (dir) {
+    DIR *dir = opendir(tempDirName);
+    if (dir)
+    {
         /* Directory exists. */
         closedir(dir);
-    } else if (ENOENT == errno) {
-        /* Directory does not exist. */
-        return -1;
-    } else {
+    }
+    else
+    {
         /* opendir() failed for some other reason. */
-        printf("Warning: opendir failed\n\n");
+        printf("Warning: opendir failed to open %s\n\n", tempDirName);
     }
 
     strncpy(currentWorkingDir, tempDirName, sizeof(currentWorkingDir) - 1);
@@ -716,34 +736,80 @@ char *getcwd(
 
 int deleteDirectory(const char *directoryToDelete, const size_t len)
 {
-    DIR *dir = opendir(directoryToDelete);
+    DIR *dir;
+    struct dirent *entity;
+    size_t baseLen;
+    int result = EXIT_SUCCESS;
 
+    (void)len;
+
+    if (directoryToDelete == NULL)
+    {
+        return EXIT_FAILURE;
+    }
+
+    baseLen = strlen(directoryToDelete);
+    if (baseLen == 0 || baseLen >= MAX_TEXT_LENGTH - 1)
+    {
+        return EXIT_FAILURE;
+    }
+
+    dir = opendir(directoryToDelete);
     if (dir == NULL)
     {
         printf("Failed to open %s\n", directoryToDelete);
         return EXIT_FAILURE;
     }
 
-    struct dirent *entity;
     entity = readdir(dir);
     while (entity != NULL)
     {
-        char path[256] = "";
-        strcpy(path, directoryToDelete);
+        char path[MAX_TEXT_LENGTH];
+        size_t nameLen;
+        size_t needsSlash;
 
-        printf("%s\n", entity->d_name);
+        if (strcmp(entity->d_name, ".") == 0 || strcmp(entity->d_name, "..") == 0)
+        {
+            entity = readdir(dir);
+            continue;
+        }
+
+        nameLen = strlen(entity->d_name);
+        needsSlash = directoryToDelete[baseLen - 1] != '\\' && directoryToDelete[baseLen - 1] != '/';
+
+        if (baseLen + needsSlash + nameLen >= sizeof(path))
+        {
+            printf("Path too long while deleting %s%s\n", directoryToDelete, entity->d_name);
+            result = EXIT_FAILURE;
+            entity = readdir(dir);
+            continue;
+        }
+
+        strcpy(path, directoryToDelete);
+        if (needsSlash)
+        {
+            strcat(path, "\\");
+        }
         strcat(path, entity->d_name);
-        printf("PAth: %s\n", path);
-        remove(path);
+
+        if (remove(path) != 0)
+        {
+            if (deleteDirectory(path, strlen(path)) != EXIT_SUCCESS)
+            {
+                printf("Failed to delete %s\n", path);
+                result = EXIT_FAILURE;
+            }
+        }
         entity = readdir(dir);
     }
-    char path1[256] = "";
-    strcpy(path1, directoryToDelete);
-    rmdir(path1);
+
     closedir(dir);
-    // char out[256] = "OUTPUT/";
-    // char fol_file[256];
-    // sprintf(fol_file, "%s\\", out);
-    // printf("%s", fol_file);
-    return EXIT_SUCCESS;
+
+    if (rmdir(directoryToDelete) != 0)
+    {
+        printf("Failed to remove directory %s\n", directoryToDelete);
+        result = EXIT_FAILURE;
+    }
+
+    return result;
 }
