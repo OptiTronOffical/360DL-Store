@@ -20,13 +20,14 @@ The free60 store is a piece of homebrew for the Xbox 360 that allows games to be
 ## How to use
 
 1. Download free60-store.zip from the releases
-2. Transfer it to your console
-3. Launch it using your favourite file manager or dashboard
-4. Search for your favourite game
-5. Navigate the menu with ↑ and ↓
-6. Select a game by pressing A
-7. Select a version of the game
-8. Press A to begin the download
+2. Extract the .xex and settings.txt files from the ZIP file, and transfer them to your console
+3. Set the output path for games in settings.txt. This will be where games will be extracted to
+4. Launch it using your favourite file manager or dashboard
+5. Search for your favourite game
+6. Navigate the menu with ↑ and ↓
+7. Select a game by pressing A
+8. Select a version of the game
+9. Press A to begin the download
 
 Currently, this program supports downloading directly from Vimms Lair. While the download speeds can be slow, it contains a variety of games.
 
