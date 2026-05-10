@@ -439,7 +439,7 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
                 switch (status)
                 {
                 case 429:
-                    printFunction("Error: A download is already in progress.\nVimms Lair only allows one download at a time.\n");
+                    printFunction("Error: A download is already in progress.\nVimms Lair only allows one download at a time. Go to https://dl3.vimm.net/cancel.php to fix this error. \n");
                     break;
                 case 404:
                     printFunction("Error: Page not found\n");

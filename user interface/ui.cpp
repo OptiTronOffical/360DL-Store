@@ -286,8 +286,10 @@ DWORD OpenKeyboardToString(
     ZeroMemory(&overlapped, sizeof(overlapped));
 
     overlapped.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    if (!overlapped.hEvent)
+    if (!overlapped.hEvent) {
+        dprintf("CreateEvent failed\n");
         return GetLastError();
+    }
 
     DWORD result = XShowKeyboardUI(
         userIndex,
@@ -301,6 +303,7 @@ DWORD OpenKeyboardToString(
 
     if (result != ERROR_IO_PENDING)
     {
+        dprintf("Keyboad Error: Failed to open keyboard\n");
         CloseHandle(overlapped.hEvent);
         return result;
     }
@@ -312,12 +315,18 @@ DWORD OpenKeyboardToString(
 
     CloseHandle(overlapped.hEvent);
 
-    if (result != ERROR_SUCCESS)
+    if (result != ERROR_SUCCESS) {
+        dprintf("Failed to get search string from keyboard\n");
+        dprintf("XGetOverlappedResult result: %lu / 0x%08X\n", result, result);
+        dprintf("Keyboard extended: %lu / 0x%08X\n", extended, extended);
         return result;
+    }
 
     // ERROR_CANCELLED means the user backed out.
-    if (extended != ERROR_SUCCESS)
+    if (extended != ERROR_SUCCESS) {
+        dprintf("Search canceled by user\n");
         return extended;
+    }
 
     WideToCharSimple(wideResult, finalResult, MAX_KEYBOARD_CHARS);
 
@@ -338,10 +347,35 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
         return EXIT_FAILURE;
     }
 
+    Sleep(1000);
+
+    while (true)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(state));
+
+		if (XInputGetState(0, &state) == ERROR_SUCCESS &&
+			(state.Gamepad.wButtons == 0))
+		{
+			break;
+		} else {
+            dprintf("Please release all controller buttons\n");
+        }
+        
+        Sleep(800);
+	}
+
+    Sleep(250);
+
     std::string gameSearchString = "";
-    DWORD keyboardResult = OpenKeyboardToString(0, &gameSearchString, L"Search for a game", L"Search for a game here", L"GTA VI");
+    DWORD keyboardResult = OpenKeyboardToString(XUSER_INDEX_ANY, &gameSearchString, L"Search for a game", L"Search for a game here", L"GTA VI");
     if (keyboardResult != ERROR_SUCCESS || gameSearchString.empty())
     {
+        dprintf("Failed to get search string from keyboard\n");
+        if(gameSearchString.empty()) {
+            dprintf("Search request was emtpy\n");
+        }
+
         free(buffer);
         return EXIT_FAILURE;
     }
@@ -354,7 +388,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 
     if (downloadFileHTTPS(searchURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
     { // downloads into a null terminated buffer
-        std::cout << "Download failed\n";
+        dprintf("Download game list failed. Ensure you searched for an actual Xbox 360 game. Ensure your search request was EXACTLY correct. \n");
         free(buffer);
         return EXIT_FAILURE;
     }
@@ -365,7 +399,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 
     if (!parse_vimm_search_results(buffer, &list)) // this strlen operation assumes that there were no NULL character before the end, which is fine for HTML, but not for other files
     {
-        fprintf(stderr, "Failed to parse HTML.\n");
+        dprintf("Failed to parse HTML.\n");
         free(buffer);
         free_game_list(&list);
         return 1;
@@ -375,6 +409,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 
     if (selected < 0)
     {
+        dprintf("Game not found. Ensure you searched for a real Xbox 360 game\n\n");
         free_game_list(&list);
         free(buffer);
         return EXIT_FAILURE;
@@ -398,7 +433,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
     OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
     if (downloadFileHTTPS(selectedURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
     { // downloads into a null terminated buffer
-        std::cout << "Download failed\n";
+        dprintf("Download game version list failed\n");
         free_game_list(&list);
         free(buffer);
         return EXIT_FAILURE;
@@ -417,6 +452,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
     int selectedMedia = ShowMediaResultsUI(&mediaList, list.items[selected].name);
     if (selectedMedia < 0)
     {
+        dprintf("Failed to find game version\n\n");
         free_media_list(&mediaList);
         free_game_list(&list);
         free(buffer);

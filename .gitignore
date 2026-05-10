@@ -12,3 +12,8 @@ Debug
 
 .vscode
 
+ipch
+
+*.sdf
+
+**/*.sdf

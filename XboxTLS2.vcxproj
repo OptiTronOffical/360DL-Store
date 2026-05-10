@@ -229,6 +229,7 @@
     </PostBuildEvent>
     <ImageXex>
       <AdditionalSections>font=$(OutDir)Media\Fonts\font.xpr</AdditionalSections>
+      <TitleID>95126000</TitleID>
     </ImageXex>
     <Deploy>
       <DeploymentType>CopyToHardDrive</DeploymentType>

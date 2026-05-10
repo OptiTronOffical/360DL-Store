@@ -407,7 +407,7 @@ int main()
 	if (!CheckGameMounted())
 		dprintf("Warning: Some paths may not be mounted\n");
 
-	dprintf("free60 store 0.0.1 alpha\n");
+	dprintf("free60 store 0.1.3 alpha\n");
 
 	char selectedGameURL[MAX_TEXT_LENGTH] = "";
 	char selectedGameName[MAX_TEXT_LENGTH] = "";
@@ -421,7 +421,8 @@ int main()
 	}
 	else
 	{
-		return EXIT_FAILURE;
+		dprintf("Failed to search for a game\n");
+		goto exitFailed;
 	}
 
 	struct Settings settings = getSettings();
@@ -432,5 +433,28 @@ int main()
 
 	dprintf("Extracting to: %s\n", outputFolder);
 
-	return getGame(std::string(selectedGameURL), "game:\\tmp.7z.001", "game:\\tmp_output", outputFolder);
+	int downloadStatus = getGame(std::string(selectedGameURL), "game:\\tmp.7z.001", "game:\\tmp_output", outputFolder);
+
+	if(downloadStatus == EXIT_SUCCESS) {
+		return EXIT_SUCCESS;
+	}
+
+exitFailed:
+	dprintf("Something went wrong! Press B to exit");
+
+	while (true)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(state));
+
+		if (XInputGetState(0, &state) == ERROR_SUCCESS &&
+			(state.Gamepad.wButtons & XINPUT_GAMEPAD_B))
+		{
+			return EXIT_FAILURE;
+		}
+
+		Sleep(50);
+	}
+
+	return EXIT_FAILURE;
 }
