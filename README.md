@@ -1,5 +1,8 @@
 # Xbox 360 game store (formerly Free60 Store)
 
+### I am sorry
+This project was intentended to be a proof of concept xbox 360 game downloader. I never expected so many people to see the post I put up online about it. I am sorry that my confusing, afterthought of a name caused issues, I never wanted it to do so. I respect the work done by the free60 project, though probably never will fully understand how much personal time and effor went into it. In short, I never wanted to make anybody mad, I just wanted to create a cool piece of homebrew. 
+
 Not affiliated with the [free60 project](https://free60.org)
 
 ## What is it?
