@@ -1,10 +1,10 @@
-# Free60 Store
+# Xbox 360 game store (formerly Free60 Store)
 
 Not affiliated with the [free60 project](https://free60.org)
 
 ## What is it?
 
-The free60 store is a piece of homebrew for the Xbox 360 that allows games to be directly downloaded onto the Xbox 360.
+The Xbox 360 game store is a piece of homebrew for the Xbox 360 that allows games to be directly downloaded onto the Xbox 360.
 
 ## Requirements
 
