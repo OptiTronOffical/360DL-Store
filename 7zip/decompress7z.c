@@ -110,9 +110,9 @@ unsigned long startTime = 0;
 
 static void print_usage(const char *prog)
 {
-    fprintf(stderr, "Usage: %s <archive.7z> [output_dir]\n", prog);
-    fprintf(stderr, "  archive.7z  - path to the 7z archive\n");
-    fprintf(stderr, "  output_dir  - destination directory (default: current dir)\n");
+    log_printf( "Usage: %s <archive.7z> [output_dir]\n", prog);
+    log_printf( "  archive.7z  - path to the 7z archive\n");
+    log_printf( "  output_dir  - destination directory (default: current dir)\n");
 }
 
 static void format_size(UInt64 size, char *buf, size_t buf_size)
@@ -182,7 +182,7 @@ static void progress_render(CProgressInfo *progress, int force)
     // Extract speed in KiB/sec
     unsigned long extractSpeed = (progress->completed_bytes / (1024) ) / elapsedTime;
 
-    // fprintf(stderr,
+    // log_printf(
     //         "\r[%.*s%*s] %5.1f%%  %s / %s%s    Time Remaining: %dh, %dm, %ds\n",
     //         (int)filled, "##############################",
     //         (int)(kProgressBarWidth - filled), "",
@@ -429,7 +429,7 @@ static int prepare_output_path(const char *path)
 
     path_len = strlen(path);
     if (path_len >= sizeof(dir)) {
-        fprintf(stderr, "Error: output path is too long: '%s'\n", path);
+        log_printf( "Error: output path is too long: '%s'\n", path);
         errno = ENAMETOOLONG;
         return -1;
     }
@@ -439,7 +439,7 @@ static int prepare_output_path(const char *path)
     if (last_sep && last_sep != dir) {
         *last_sep = '\0';
         if (make_dirs(dir) != 0 && errno != EEXIST) {
-            fprintf(stderr, "Error: cannot create directory '%s': %s\n",
+            log_printf( "Error: cannot create directory '%s': %s\n",
                     dir, strerror(errno));
             return -1;
         }
@@ -457,7 +457,7 @@ static int open_output_path(CSzFile *file, const char *path)
 
     wres = OutFile_Open(file, path);
     if (wres != 0) {
-        fprintf(stderr, "Error: cannot open '%s' for writing (WRes=%u)\n",
+        log_printf( "Error: cannot open '%s' for writing (WRes=%u)\n",
                 path, (unsigned)wres);
         errno = (int)wres;
         return -1;
@@ -486,13 +486,13 @@ static int split_output_open_current(CSplitOutFile *out)
     if (out->split_output) {
         if (build_numbered_path(out->base_path, out->part_index,
                                 out->current_path, sizeof(out->current_path)) != 0) {
-            fprintf(stderr, "Error: output path is too long: '%s'\n", out->base_path);
+            log_printf( "Error: output path is too long: '%s'\n", out->base_path);
             return -1;
         }
     } else {
         size_t path_len = strlen(out->base_path);
         if (path_len >= sizeof(out->current_path)) {
-            fprintf(stderr, "Error: output path is too long: '%s'\n", out->base_path);
+            log_printf( "Error: output path is too long: '%s'\n", out->base_path);
             errno = ENAMETOOLONG;
             return -1;
         }
@@ -515,7 +515,7 @@ static int split_output_open(CSplitOutFile *out, const char *path,
     File_Construct(&out->file);
 
     if (path_len >= sizeof(out->base_path)) {
-        fprintf(stderr, "Error: output path is too long: '%s'\n", path);
+        log_printf( "Error: output path is too long: '%s'\n", path);
         errno = ENAMETOOLONG;
         return -1;
     }
@@ -533,7 +533,7 @@ static int split_output_close(CSplitOutFile *out)
 
     wres = File_Close(&out->file);
     if (wres != 0) {
-        fprintf(stderr, "Error: cannot close '%s' (WRes=%u)\n",
+        log_printf( "Error: cannot close '%s' (WRes=%u)\n",
                 out->current_path, (unsigned)wres);
         File_Construct(&out->file);
         return -1;
@@ -577,7 +577,7 @@ static int write_chunk(CSplitOutFile *out, const Byte *data, size_t size)
             size_t processed = chunk;
             WRes wres = File_Write(&out->file, data, &processed);
             if (wres != 0 || processed != chunk) {
-                fprintf(stderr, "Error: write failed for '%s' (WRes=%u)\n",
+                log_printf( "Error: write failed for '%s' (WRes=%u)\n",
                         out->current_path, (unsigned)wres);
                 return -1;
             }
@@ -728,14 +728,14 @@ static int joined_stream_add_part(CJoinedInStream *stream, const char *path)
 
     wres = InFile_Open(&part->file, path);
     if (wres != 0) {
-        fprintf(stderr, "Error: cannot open archive part '%s' (WRes=%u)\n",
+        log_printf( "Error: cannot open archive part '%s' (WRes=%u)\n",
                 path, (unsigned)wres);
         return -1;
     }
 
     wres = File_GetLength(&part->file, &part->size);
     if (wres != 0) {
-        fprintf(stderr, "Error: cannot get size of archive part '%s' (WRes=%u)\n",
+        log_printf( "Error: cannot get size of archive part '%s' (WRes=%u)\n",
                 path, (unsigned)wres);
         File_Close(&part->file);
         File_Construct(&part->file);
@@ -1149,7 +1149,7 @@ int decompressSevenZipFile(const char *inputFile, const char *outputPath)
         /* Allocate the look-ahead buffer manually so we can free it later */
         look_stream.buf = (Byte *)ISzAlloc_Alloc(&alloc_imp, kInputBufSize);
         if (!look_stream.buf) {
-            fprintf(stderr, "Error: out of memory\n");
+            log_printf( "Error: out of memory\n");
             joined_stream_close(&archive_stream);
             return EXIT_FAILURE;
         }
@@ -1162,7 +1162,7 @@ int decompressSevenZipFile(const char *inputFile, const char *outputPath)
     SzArEx_Init(&db);
     res = SzArEx_Open(&db, &look_stream.vt, &alloc_imp, &alloc_temp_imp);
     if (res != SZ_OK) {
-        fprintf(stderr, "Error: SzArEx_Open failed (SRes=%d).\n"
+        log_printf( "Error: SzArEx_Open failed (SRes=%d).\n"
                         "  The file may not be a valid .7z archive, or it may use\n"
                         "  encryption / a compression method other than LZMA/LZMA2.\n",
                 res);
@@ -1196,14 +1196,14 @@ int decompressSevenZipFile(const char *inputFile, const char *outputPath)
         utf16_name = (UInt16 *)ISzAlloc_Alloc(&alloc_imp,
                                               utf16_len * sizeof(*utf16_name));
         if (!utf16_name) {
-            fprintf(stderr, "Error: out of memory while reading file name\n");
+            log_printf( "Error: out of memory while reading file name\n");
             errors++;
             continue;
         }
 
         SzArEx_GetFileNameUtf16(&db, i, utf16_name);
         if (utf16_to_path(utf16_name, name_buf, sizeof(name_buf)) != 0) {
-            fprintf(stderr, "Error: file name is too long to extract entry %u\n",
+            log_printf( "Error: file name is too long to extract entry %u\n",
                     (unsigned)i);
             ISzAlloc_Free(&alloc_imp, utf16_name);
             errors++;
@@ -1221,7 +1221,7 @@ int decompressSevenZipFile(const char *inputFile, const char *outputPath)
             /* Create directory entry */
             printf("  d  %s\n", name_buf);
             if (make_dirs(full_path) != 0 && errno != EEXIST) {
-                fprintf(stderr, "Warning: cannot create directory '%s': %s\n",
+                log_printf( "Warning: cannot create directory '%s': %s\n",
                         full_path, strerror(errno));
             }
             continue;
@@ -1231,10 +1231,10 @@ int decompressSevenZipFile(const char *inputFile, const char *outputPath)
         res = extract_file_streaming(&db, &look_stream.vt, i, full_path,
                                      name_buf, &alloc_imp, &progress);
         if (res != SZ_OK) {
-            fprintf(stderr, "Error: failed to extract '%s' (SRes=%d)\n",
+            log_printf( "Error: failed to extract '%s' (SRes=%d)\n",
                     name_buf, res);
             if (res == SZ_ERROR_UNSUPPORTED) {
-                fprintf(stderr,
+                log_printf(
                         "  Streaming mode supports archives where each file has its own\n"
                         "  folder/block and uses Copy, LZMA, or LZMA2 with no extra filters.\n");
             }

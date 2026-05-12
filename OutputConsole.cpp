@@ -45,6 +45,15 @@ void  __cdecl dprintf(const char* strFormat, ...)
 	}
 #else
 
+	FILE* fp = NULL;
+    errno_t err = fopen_s(&fp, LOG_FILE_PATH, "a+");
+    if(fp) {
+        fprintf(fp, "%s", buf);
+        fclose(fp);
+    } else {
+		printf("Failed to open log file\n");
+	}
+
 #endif
 }
 
@@ -57,4 +66,23 @@ void MakeConsole(const char* font, unsigned long BackgroundColor, unsigned long 
 void ClearConsole()
 {
 	g_console.Clear();
+}
+
+void __cdecl log_printf(const char* strFormat, ...) {
+	va_list pArglist;
+	va_start(pArglist, strFormat);
+#ifdef USE_UNICODE
+	_vsnwprintf_s(buf, TEXTBUFFER_SIZE, strFormat, pArglist);
+#else
+	vsnprintf_s(buf, TEXTBUFFER_SIZE, strFormat, pArglist);
+#endif
+	va_end(pArglist);
+	
+	FILE* fp = NULL;
+    errno_t err = fopen_s(&fp, LOG_FILE_PATH, "a+");
+    if(fp) {
+        fprintf(fp, "%s", buf);
+        fclose(fp);
+    }
+
 }

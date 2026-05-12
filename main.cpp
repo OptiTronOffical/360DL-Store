@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 #include "downloadFile.h"
 #include "decompress7z.h"
@@ -403,11 +404,13 @@ struct Settings getSettings()
 
 int main()
 {
+	remove(LOG_FILE_PATH);
+
 	MakeConsole("embed:\\font", CONSOLE_COLOR_BLACK, CONSOLE_COLOR_WHITE);
 	if (!CheckGameMounted())
 		dprintf("Warning: Some paths may not be mounted\n");
 
-	dprintf("free60 store 0.1.3 alpha\n");
+	dprintf("free60 store 0.1.4 alpha\n");
 
 	char selectedGameURL[MAX_TEXT_LENGTH] = "";
 	char selectedGameName[MAX_TEXT_LENGTH] = "";

@@ -14,6 +14,13 @@
 #define HTML_BUFFER_CAPACITY (1024 * 1024 * 4);
 
 
+enum DownloadType {
+    ORIGINAL_XBOX = 1,
+    XBOX_360,
+    XBLA
+};
+
+
 static std::string UrlEncodeQuery(const std::string &value)
 {
     static const char hex[] = "0123456789ABCDEF";
@@ -337,6 +344,9 @@ DWORD OpenKeyboardToString(
 
 int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 {
+    // enum DownloadType downloadType = ORIGINAL_XBOX;
+    enum DownloadType downloadType = XBOX_360;
+
     unsigned long long OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
 
     char *buffer = (char *)malloc(OUTPUT_BUFFER_SIZE); // 4MB buffer just to be safe
@@ -382,8 +392,26 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 
     std::cout << "Text output: " << gameSearchString << "\n";
 
-    std::string searchURL = "https://vimm.net/vault/?p=list&system=Xbox360&q=";
+    std::string searchURL = "https://vimm.net/vault/?p=list&system=Xbox360&q="; //default
 
+    switch (downloadType)
+    {
+    case ORIGINAL_XBOX:
+        searchURL = "https://vimm.net/vault/?p=list&system=Xbox&q=";
+        break;
+    
+    case XBOX_360:
+        searchURL = "https://vimm.net/vault/?p=list&system=Xbox360&q=";
+        break;
+    
+    case XBLA:
+        searchURL = "https://vimm.net/vault/?p=list&system=X360-D&q=";
+        break;
+    
+    default:
+        break;
+    }
+    
     searchURL.append(UrlEncodeQuery(gameSearchString));
 
     if (downloadFileHTTPS(searchURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
@@ -460,6 +488,25 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
     }
 
     std::string finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
+
+    switch (downloadType)
+    {
+    case ORIGINAL_XBOX:
+        finalDownloadURL = "https://dl2.vimm.net/?mediaId=";
+        break;
+    
+    case XBOX_360:
+        finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
+        break;
+    
+    case XBLA:
+        finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
+        break;
+    
+    default:
+        break;
+    }
+
     finalDownloadURL.append(mediaList.items[selectedMedia].id);
 
     if (gameURL && len > 0)
