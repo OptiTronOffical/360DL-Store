@@ -1,11 +1,4 @@
-# X Store (formerly Free60 Store)
 
-### I am sorry
-This project was intentended to be a proof of concept xbox 360 game downloader. I never expected so many people to see the post I put up online about it. I am sorry that my confusing, afterthought of a name caused issues, I never wanted it to do so. I respect the work done by the free60 project, though probably never will fully understand how much personal time and effor went into it. In short, I never wanted to make anybody mad, I just wanted to create a cool piece of homebrew. 
-
-Not affiliated with the [free60 project](https://free60.org)
-
-## What is it?
 
 The Xbox 360 game store is a piece of homebrew for the Xbox 360 that allows games to be directly downloaded onto the Xbox 360.
 
@@ -22,7 +15,7 @@ The Xbox 360 game store is a piece of homebrew for the Xbox 360 that allows game
 
 ## How to use
 
-1. Download free60-store.zip from the releases
+1. Download store.zip from the releases
 2. Extract the .xex and settings.txt files from the ZIP file, and transfer them to your console
 3. Set the output path for games in settings.txt. This will be where games will be extracted to
 4. Launch it using your favourite file manager or dashboard
