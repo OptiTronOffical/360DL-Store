@@ -7,6 +7,7 @@
 
 #include <OutputConsole.h>
 #include <downloadFile.h>
+#include <settings.h>
 
 #include "vimms_lair.h"
 
@@ -414,7 +415,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
     
     searchURL.append(UrlEncodeQuery(gameSearchString));
 
-    if (downloadFileHTTPS(searchURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
+    if (downloadFileHTTPS(searchURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) != 200)
     { // downloads into a null terminated buffer
         dprintf("Download game list failed. Ensure you searched for an actual Xbox 360 game. Ensure your search request was EXACTLY correct. \n");
         free(buffer);
@@ -459,7 +460,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
 	// Now download the selected game
 
     OUTPUT_BUFFER_SIZE = HTML_BUFFER_CAPACITY;
-    if (downloadFileHTTPS(selectedURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) == false)
+    if (downloadFileHTTPS(selectedURL, "", buffer, &OUTPUT_BUFFER_SIZE, false, dprintf) != 200)
     { // downloads into a null terminated buffer
         dprintf("Download game version list failed\n");
         free_game_list(&list);
@@ -487,25 +488,7 @@ int showUI(char *gameURL, int len, char *gameName, int gameNameLen)
         return EXIT_FAILURE;
     }
 
-    std::string finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
-
-    switch (downloadType)
-    {
-    case ORIGINAL_XBOX:
-        finalDownloadURL = "https://dl2.vimm.net/?mediaId=";
-        break;
-    
-    case XBOX_360:
-        finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
-        break;
-    
-    case XBLA:
-        finalDownloadURL = "https://dl3.vimm.net/?mediaId=";
-        break;
-    
-    default:
-        break;
-    }
+    std::string finalDownloadURL = (DOWNLOAD_DOMAIN "/?mediaId=");
 
     finalDownloadURL.append(mediaList.items[selectedMedia].id);
 

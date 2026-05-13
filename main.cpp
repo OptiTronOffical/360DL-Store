@@ -230,10 +230,26 @@ static int DeleteSplitFiles(const char *firstPartFile)
 	return result;
 }
 
-int getGame(const std::string URL, const std::string sevenZipFile, const std::string isoFolder, const std::string outputFolder)
+int getGame(std::string URL, const std::string sevenZipFile, const std::string isoFolder, const std::string outputFolder)
 {
-	if (downloadFileHTTPS(URL, sevenZipFile, NULL, NULL, true, dprintf) == false)
+	std::string backupDomain = SECONDARY_DOWNLOAD_DOMAIN;
+	std::string expectedDomain = DOWNLOAD_DOMAIN;
+
+	int httpStatus = downloadFileHTTPS(URL, sevenZipFile, NULL, NULL, true, dprintf);
+	if (httpStatus < 200)
 	{
+		return EXIT_FAILURE;
+	} else if (httpStatus >= 400 && URL.rfind(expectedDomain, 0) == 0) { // page not found. Try different domain. 
+		URL.replace(0, expectedDomain.length(), backupDomain);
+
+		dprintf("Trying alternate download link\n");
+
+		if(downloadFileHTTPS(URL, sevenZipFile, NULL, NULL, true, dprintf) != 200) {
+			return EXIT_FAILURE;
+		}
+	} else if (httpStatus == 200) {
+		
+	} else {
 		return EXIT_FAILURE;
 	}
 
@@ -410,7 +426,7 @@ int main()
 	if (!CheckGameMounted())
 		dprintf("Warning: Some paths may not be mounted\n");
 
-	dprintf("free60 store 0.1.4 alpha\n");
+	dprintf("X Store store 0.1.5 alpha\n");
 
 	char selectedGameURL[MAX_TEXT_LENGTH] = "";
 	char selectedGameName[MAX_TEXT_LENGTH] = "";

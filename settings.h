@@ -6,4 +6,7 @@
 // Should be large enough (I hope)
 #define MAX_TEXT_LENGTH 512
 
+#define DOWNLOAD_DOMAIN             "https://dl2.vimm.net"
+#define SECONDARY_DOWNLOAD_DOMAIN   "https://dl3.vimm.net"
+
 #endif

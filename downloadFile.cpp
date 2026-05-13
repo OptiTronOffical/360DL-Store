@@ -299,6 +299,7 @@ bool endsWith(const std::string &fullString,
 int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBuffer, unsigned long long *outputBufferSize, void printFunction(const char *_format, ...))
 {
     unsigned long long outputBufferSizeConst = 0;
+    int responseCode = 0; // HTTP status code
 
     if (outputBuffer != NULL)
     {
@@ -431,6 +432,7 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
             totalContentLength = parseContentLength(headerBuffer, headerEnd);
 
             int status = parseStatus(headerBuffer, headerEnd);
+            responseCode = status; //value to return
 
             if (status != 200)
             {
@@ -529,7 +531,7 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
                 if (bytesThisFile > 0 && fwrite(buffer, 1, bytesThisFile, file) != bytesThisFile)
                 {
                     printFunction("Failed to write to file\n");
-                    break;
+                    goto failure;
                 }
 
                 totalWritten += bytesThisFile;
@@ -572,7 +574,7 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
             if (fwrite(buffer, sizeof(buffer[0]), r, file) < r)
             {
                 printFunction("Failed to write to file\n");
-                break;
+                goto failure;
             }
 
             totalWritten += r;
@@ -641,9 +643,13 @@ int DumpResponse(XboxTLSContext *ctx, const std::string filename, char *outputBu
 
     std::cout << "Download Complete\n";
 
-    return EXIT_SUCCESS;
+    return responseCode;
 
 failure:
+
+    if(responseCode == 200) {
+        responseCode = -1;
+    }
 
     if (file != NULL)
         fclose(file);
@@ -659,7 +665,7 @@ failure:
     if (fileBuffer != NULL)
         free(fileBuffer);
 
-    return EXIT_FAILURE;
+    return responseCode;
 }
 
 int addTrustAnchors(XboxTLSContext *ctx) {
@@ -697,10 +703,12 @@ int addTrustAnchors(XboxTLSContext *ctx) {
     return EXIT_SUCCESS;
 }
 
-bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *dataBuffer, unsigned long long *outputBufferSize, bool downloadIntoFile, void printFunction(const char *_format, ...))
+int downloadFileHTTPS(const std::string URL, const std::string fileName, char *dataBuffer, unsigned long long *outputBufferSize, bool downloadIntoFile, void printFunction(const char *_format, ...))
 {
     char *domain;
     char *path;
+
+    int httpStatus = 0;
 
     if ((domain = (char *)malloc(URL.length() + 1)) == NULL)
     {
@@ -846,13 +854,13 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     // Step 7: Read and print response
     if (downloadIntoFile)
     {
-        if (DumpResponse(&ctx, fileName, NULL, NULL, printFunction) == EXIT_FAILURE)
+        if ( (httpStatus = DumpResponse(&ctx, fileName, NULL, NULL, printFunction)) != 200)
         {
             ERROR("Failed to download data over HTTPS");
             goto downloadFailed;
         }
     } else {
-        if (DumpResponse(&ctx, "", dataBuffer, outputBufferSize, printFunction) == EXIT_FAILURE)
+        if ( (httpStatus = DumpResponse(&ctx, "", dataBuffer, outputBufferSize, printFunction)) != 200)
         {
             ERROR("Failed to download data over HTTPS");
             goto downloadFailed;
@@ -867,7 +875,7 @@ bool downloadFileHTTPS(const std::string URL, const std::string fileName, char *
     free(domain);
     free(path);
 
-    return true;
+    return httpStatus;
 
 downloadFailed:
     XboxTLS_Free(&ctx);
@@ -878,5 +886,5 @@ downloadFailed:
     free(domain);
     free(path);
 
-    return false;
+    return httpStatus;
 }
